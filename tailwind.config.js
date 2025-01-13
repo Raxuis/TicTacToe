@@ -24,6 +24,9 @@ export default {
         },
         "dark-gray": {
           DEFAULT: "#203741",
+        },
+        cell: {
+          DEFAULT: "#1f3640",
         }
       },
       fontFamily: {

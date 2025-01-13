@@ -2,9 +2,11 @@ import {Link} from "react-router";
 
 const Header = () => {
     return (
-        <header className="">
+        <header>
             <nav className="flex items-center justify-between">
-                <Link to="/">Home</Link>
+                <div className="flex items-center gap-2">
+                    <Link to="/">Home</Link>
+                </div>
             </nav>
         </header>
     );

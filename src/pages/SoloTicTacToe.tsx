@@ -1,7 +1,7 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {BoardPlayer, initialBoard, Player} from "../constants";
-import cross from "../assets/cross.svg";
-import circle from "../assets/circle.svg";
+import Cell from "../Cell";
+import CurrentPlayerInfo from "../CurrentPlayerInfo";
 
 const SoloTicTacToe = () => {
     const [board, setBoard] = useState<BoardPlayer[][]>(initialBoard);
@@ -20,36 +20,65 @@ const SoloTicTacToe = () => {
         )
 
         setBoard(newBoard);
+        setCurrentPlayer("O");
     }
 
+    const playBot = () => {
+        if (winner) return;
+        console.log("Bot has played.")
+
+        const emptyCells: [number, number][] = [];
+
+        board.forEach((row, rowIndex) =>
+            row.forEach((cell, colIndex) => {
+                if (cell === "") emptyCells.push([rowIndex, colIndex]);
+            })
+        );
+
+        if (emptyCells.length === 0 || winner) return;
+
+        const [row, col] = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+
+        const newBoard = board.map((rowArray, rowIndex) =>
+            rowArray.map((cell, colIndex) =>
+                rowIndex === row && colIndex === col ? "O" : cell
+            )
+        );
+
+        setBoard(newBoard);
+        setCurrentPlayer("X");
+    }
+
+    useEffect(() => {
+        if (currentPlayer === "O" && !winner) {
+            playBot();
+            setCurrentPlayer("X");
+        }
+
+        return () => {
+            setCurrentPlayer("X");
+        }
+
+    }, [board, currentPlayer]);
+
     return (
-        <>
-            <p className="text-xl">
-                {
-                    currentPlayer === "X" ? "Votre tour !" : "Tour du bot !"
-                }
-            </p>
+        <div className="flex flex-col justify-center items-center gap-4">
+            <CurrentPlayerInfo currentPlayer={currentPlayer}/>
+
             <div className="grid grid-cols-3 gap-2">
                 {
                     board.map((row, rowIndex) =>
-                        row.map((cell, colIndex) => {
+                        row.map((cellValue, colIndex) => {
                             return (
-                                <div
-                                    key={`${rowIndex}-${colIndex}`}
-                                    className="bg-primary-dark size-20 border flex items-center justify-center text-xl font-bold cursor-pointer p-2"
-                                    onClick={() => handleClick(rowIndex, colIndex)}
-                                >
-                                    {cell === "X" ? (
-                                        <img src={cross} alt="cross"/>
-                                    ) : cell === "O" ? (
-                                        <img src={circle} alt="circle"/>
-                                    ) : cell}
-                                </div>
+                                <Cell cellValue={cellValue}
+                                      key={`${rowIndex}-${colIndex}`}
+                                      onClick={() => handleClick(rowIndex, colIndex)}
+                                />
                             )
                         })
                     )}
             </div>
-        </>
+        </div>
     );
 };
 
