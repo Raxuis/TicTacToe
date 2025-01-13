@@ -51,12 +51,8 @@ const SoloTicTacToe = () => {
 
     useEffect(() => {
         if (currentPlayer === "O" && !winner) {
-            playBot();
-            setCurrentPlayer("X");
-        }
-
-        return () => {
-            setCurrentPlayer("X");
+            const timer = setTimeout(playBot, 500);
+            return () => clearTimeout(timer);
         }
 
     }, [board, currentPlayer]);
