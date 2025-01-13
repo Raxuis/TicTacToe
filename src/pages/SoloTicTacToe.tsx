@@ -2,11 +2,13 @@ import {useEffect, useState} from "react";
 import {BoardPlayer, initialBoard, Player, Winner} from "../constants";
 import Cell from "../Cell";
 import CurrentPlayerInfo from "../CurrentPlayerInfo";
+import WinnerInfo from "../WinnerInfo";
 
 const SoloTicTacToe = () => {
     const [board, setBoard] = useState<BoardPlayer[][]>(initialBoard);
     const [currentPlayer, setCurrentPlayer] = useState<Player>("X");
     const [winner, setWinner] = useState<Winner | null>(null);
+    const [showModal, setShowModal] = useState<boolean>(true);
 
     const handleClick = (
         row: number, col: number) => {
@@ -57,11 +59,11 @@ const SoloTicTacToe = () => {
             // Lignes
             [tab[0][0], tab[0][1], tab[0][2]],
             [tab[1][0], tab[1][1], tab[1][2]],
-            [tab[2][0], tab[2][1], tab[2][1]],
+            [tab[2][0], tab[2][1], tab[2][2]],
             // Colonnes
             [tab[0][0], tab[1][0], tab[2][0]],
             [tab[0][1], tab[1][1], tab[2][1]],
-            [tab[0][2], tab[1][2], tab[1][3]],
+            [tab[0][2], tab[1][2], tab[2][2]],
             // Diagonales
             [tab[0][0], tab[1][1], tab[2][2]],
             [tab[0][2], tab[1][1], tab[2][0]]
