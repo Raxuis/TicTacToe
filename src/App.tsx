@@ -8,7 +8,7 @@ function App() {
         <Layout>
             <Routes>
                 <Route path="/" element={<Homepage/>}/>
-                <Route path="/solo-tic-tac-toe" element={<SoloTicTacToe/>}/>
+                <Route path="/solo" element={<SoloTicTacToe/>}/>
             </Routes>
         </Layout>
     )

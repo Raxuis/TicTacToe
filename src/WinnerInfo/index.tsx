@@ -1,7 +1,8 @@
 import {Winner} from "../constants";
 import Button from "../Button";
-import {cn} from "../libs/utils.ts";
+import {cn} from "../libs/cn.ts";
 import {useNavigate} from "react-router";
+import {useLocalStorage} from "../hooks/useLocalStorage.ts";
 
 
 type Props = {
@@ -15,6 +16,10 @@ const WinnerInfo = (
     {showModal, setShowModal, resetBoard, winner}: Props) => {
 
     const navigate = useNavigate();
+    // const [ranking, setRanking] = useLocalStorage("ranking", new Map(
+    // ));
+
+    // console.log(ranking);
 
     const textColor = winner === "O"
         ? "text-primary-dark"
