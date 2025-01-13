@@ -8,7 +8,7 @@ const SoloTicTacToe = () => {
     const [board, setBoard] = useState<BoardPlayer[][]>(initialBoard);
     const [currentPlayer, setCurrentPlayer] = useState<Player>("X");
     const [winner, setWinner] = useState<Winner | null>(null);
-    const [showModal, setShowModal] = useState<boolean>(true);
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     const handleClick = (
         row: number, col: number) => {
@@ -72,17 +72,20 @@ const SoloTicTacToe = () => {
         for (const row of tabToCheck) {
             if (row.every(cell => cell === "X")) {
                 setWinner("X");
+                setShowModal(true);
                 return
             }
 
             if (row.every(cell => cell === "O")) {
                 setWinner("O");
+                setShowModal(true);
                 return
             }
         }
 
         if (tabToCheck.flat().every((cell) => cell !== "")) {
             setWinner("Draw");
+            setShowModal(true);
         }
     }
 
@@ -98,23 +101,21 @@ const SoloTicTacToe = () => {
         <div className="flex flex-col justify-center items-center gap-4">
             <CurrentPlayerInfo currentPlayer={currentPlayer}/>
 
-            {
-                !winner ? (
-                    <div className="grid grid-cols-3 gap-2">
-                        {
-                            board.map((row, rowIndex) =>
-                                row.map((cellValue, colIndex) => {
-                                    return (
-                                        <Cell cellValue={cellValue}
-                                              key={`${rowIndex}-${colIndex}`}
-                                              onClick={() => handleClick(rowIndex, colIndex)}
-                                        />
-                                    )
-                                })
-                            )}
-                    </div>
-                ) : <p>Winner is : {winner}</p>
-            }
+            <div className="grid grid-cols-3 gap-2">
+                {
+                    board.map((row, rowIndex) =>
+                        row.map((cellValue, colIndex) => {
+                            return (
+                                <Cell cellValue={cellValue}
+                                      key={`${rowIndex}-${colIndex}`}
+                                      onClick={() => handleClick(rowIndex, colIndex)}
+                                />
+                            )
+                        })
+                    )}
+            </div>
+
+            <WinnerInfo showModal={showModal} setShowModal={setShowModal} winner={winner} />
         </div>
     );
 };

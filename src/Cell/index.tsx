@@ -6,7 +6,7 @@ const Cell = (
     {cellValue, onClick}: { cellValue: BoardPlayer, onClick: () => void }) => {
     return (
         <div
-            className="bg-cell size-20 border flex items-center justify-center text-xl font-bold cursor-pointer p-4 rounded-lg"
+            className="bg-medium-gray size-20 flex items-center justify-center text-xl font-bold cursor-pointer p-4 rounded-lg"
             onClick={onClick}
         >
             {cellValue === "X" ? (
