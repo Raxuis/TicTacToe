@@ -12,8 +12,9 @@ const SoloTicTacToe = () => {
 
     const handleClick = (
         row: number, col: number) => {
-        console.log(row, col);
-        if (board[row][col] !== "" || winner) return;
+
+        if (board[row][col] !== "" || currentPlayer === "O" || winner) return;
+
         const newBoard = board.map(
             (rowArray: BoardPlayer[], rowIndex: number) =>
                 rowArray.map(
@@ -29,7 +30,6 @@ const SoloTicTacToe = () => {
 
     const playBot = () => {
         if (winner) return;
-        console.log("Bot has played.")
 
         const emptyCells: [number, number][] = [];
 
@@ -121,7 +121,7 @@ const SoloTicTacToe = () => {
                     )}
             </div>
 
-            <WinnerInfo showModal={showModal} setShowModal={setShowModal} winner={winner} resetBoard={resetBoard} />
+            <WinnerInfo showModal={showModal} setShowModal={setShowModal} winner={winner} resetBoard={resetBoard}/>
         </div>
     );
 };
