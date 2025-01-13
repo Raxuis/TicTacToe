@@ -8,15 +8,17 @@ const CurrentPlayerInfo = ({currentPlayer}: { currentPlayer: Player }) => {
             ? "text-primary-dark"
             : "text-primary";
     return (
-        <div className="inline-block bg-cell p-2 rounded-xl shadow-2xl shadow-primary/10">
-            {
-                currentPlayer === "X" ? (
-                    <img src={cross} alt="cross"/>
-                ) : (
-                    <img src={circle} alt="circle"/>
-                )
-            }
-            <p className={`${textColor} font-bold`}>TURN</p>
+        <div className="block">
+            <div className="flex gap-4 items-center justify-center bg-cell  rounded-lg shadow-2xl shadow-primary/10 p-2 px-4">
+                {
+                    currentPlayer === "X" ? (
+                        <img src={cross} alt="cross" className="object-cover size-5"/>
+                    ) : (
+                        <img src={circle} alt="circle" className="object-cover size-5"/>
+                    )
+                }
+                <p className={`${textColor} font-bold`}>TURN</p>
+            </div>
         </div>
     );
 };
