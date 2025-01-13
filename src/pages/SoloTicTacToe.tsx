@@ -67,6 +67,18 @@ const SoloTicTacToe = () => {
             [tab[0][2], tab[1][1], tab[2][0]]
         ]
 
+        for (const row of tabToCheck) {
+            if (row.every(cell => cell === "X")) {
+                setWinner("X");
+                return
+            }
+
+            if (row.every(cell => cell === "O")) {
+                setWinner("O");
+                return
+            }
+        }
+
         if (tabToCheck.flat().every((cell) => cell !== "")) {
             setWinner("Draw");
         }
@@ -84,19 +96,23 @@ const SoloTicTacToe = () => {
         <div className="flex flex-col justify-center items-center gap-4">
             <CurrentPlayerInfo currentPlayer={currentPlayer}/>
 
-            <div className="grid grid-cols-3 gap-2">
-                {
-                    board.map((row, rowIndex) =>
-                        row.map((cellValue, colIndex) => {
-                            return (
-                                <Cell cellValue={cellValue}
-                                      key={`${rowIndex}-${colIndex}`}
-                                      onClick={() => handleClick(rowIndex, colIndex)}
-                                />
-                            )
-                        })
-                    )}
-            </div>
+            {
+                !winner ? (
+                    <div className="grid grid-cols-3 gap-2">
+                        {
+                            board.map((row, rowIndex) =>
+                                row.map((cellValue, colIndex) => {
+                                    return (
+                                        <Cell cellValue={cellValue}
+                                              key={`${rowIndex}-${colIndex}`}
+                                              onClick={() => handleClick(rowIndex, colIndex)}
+                                        />
+                                    )
+                                })
+                            )}
+                    </div>
+                ) : <p>Winner is : {winner}</p>
+            }
         </div>
     );
 };
