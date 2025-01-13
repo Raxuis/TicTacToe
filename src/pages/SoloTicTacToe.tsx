@@ -89,6 +89,12 @@ const SoloTicTacToe = () => {
         }
     }
 
+    const resetBoard = () => {
+        setBoard(initialBoard);
+        setCurrentPlayer("X");
+        setWinner(null);
+    }
+
     useEffect(() => {
         if (currentPlayer === "O" && !winner) {
             const timer = setTimeout(playBot, 500);
@@ -115,7 +121,7 @@ const SoloTicTacToe = () => {
                     )}
             </div>
 
-            <WinnerInfo showModal={showModal} setShowModal={setShowModal} winner={winner} />
+            <WinnerInfo showModal={showModal} setShowModal={setShowModal} winner={winner} resetBoard={resetBoard} />
         </div>
     );
 };

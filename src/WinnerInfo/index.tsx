@@ -1,18 +1,25 @@
 import {Winner} from "../constants";
 import Button from "../Button";
 import {cn} from "../libs/utils.ts";
+import {useNavigate} from "react-router";
+
 
 type Props = {
     showModal: boolean,
     setShowModal: (showModal: boolean) => void,
+    resetBoard: () => void,
     winner: Winner | null,
 }
 
 const WinnerInfo = (
-    {showModal, setShowModal, winner}: Props) => {
+    {showModal, setShowModal, resetBoard, winner}: Props) => {
+
+    const navigate = useNavigate();
+
     const textColor = winner === "O"
         ? "text-primary-dark"
         : "text-primary";
+
     return (
         showModal && (
             <dialog id="my_modal_2" className="modal bg-black/50" open={showModal}>
@@ -27,10 +34,17 @@ const WinnerInfo = (
                         </h3>
                     )}
                     <div className="flex justify-center gap-4 pt-2">
-                        <Button className="bg-primary text-medium-gray cursor-pointer" onClick={() => setShowModal(false)}>
+                        <Button className="bg-primary text-medium-gray cursor-pointer" onClick={() => {
+                            navigate("/");
+                            setShowModal(false);
+                        }}>
                             QUIT
                         </Button>
-                        <Button className="bg-yellow-500 text-medium-gray cursor-pointer" onClick={() => setShowModal(false)}>
+                        <Button className="bg-yellow-500 text-medium-gray cursor-pointer"
+                                onClick={() => {
+                                    setShowModal(false);
+                                    resetBoard();
+                                }}>
                             NEXT ROUND
                         </Button>
                     </div>
