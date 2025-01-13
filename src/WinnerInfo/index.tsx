@@ -10,16 +10,31 @@ type Props = {
     setShowModal: (showModal: boolean) => void,
     resetBoard: () => void,
     winner: Winner | null,
+    username: string | null
 }
 
+type RankingEntry = Record<string, number>;
+
 const WinnerInfo = (
-    {showModal, setShowModal, resetBoard, winner}: Props) => {
+    {showModal, setShowModal, resetBoard, winner, username}: Props) => {
 
     const navigate = useNavigate();
-    // const [ranking, setRanking] = useLocalStorage("ranking", new Map(
-    // ));
+    const [ranking, setRanking] = useLocalStorage<RankingEntry>("ranking", {});
 
-    // console.log(ranking);
+    const handleClick = (action: "NEXT" | "QUIT") => {
+        if (action === "NEXT") {
+            resetBoard();
+        } else if (action === "QUIT") {
+            navigate('/');
+        }
+        if (winner !== "Draw" && winner !== null && winner !== "O" && username) {
+            setRanking(prevRanking => ({
+                ...prevRanking,
+                [username]: (prevRanking[username] || 0) + 1
+            }));
+        }
+        setShowModal(false);
+    }
 
     const textColor = winner === "O"
         ? "text-primary-dark"
@@ -39,17 +54,12 @@ const WinnerInfo = (
                         </h3>
                     )}
                     <div className="flex justify-center gap-4 pt-2">
-                        <Button className="bg-primary text-medium-gray cursor-pointer" onClick={() => {
-                            navigate("/");
-                            setShowModal(false);
-                        }}>
+                        <Button className="bg-primary text-medium-gray cursor-pointer"
+                                onClick={() => handleClick("QUIT")}>
                             QUIT
                         </Button>
                         <Button className="bg-yellow-500 text-medium-gray cursor-pointer"
-                                onClick={() => {
-                                    setShowModal(false);
-                                    resetBoard();
-                                }}>
+                                onClick={() => handleClick("NEXT")}>
                             NEXT ROUND
                         </Button>
                     </div>

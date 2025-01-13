@@ -3,12 +3,18 @@ import {BoardPlayer, initialBoard, Player, Winner} from "../constants";
 import Cell from "../Cell";
 import CurrentPlayerInfo from "../CurrentPlayerInfo";
 import WinnerInfo from "../WinnerInfo";
+import {useLocation, useNavigate} from "react-router";
 
 const SoloTicTacToe = () => {
     const [board, setBoard] = useState<BoardPlayer[][]>(initialBoard);
     const [currentPlayer, setCurrentPlayer] = useState<Player>("X");
+    const [username, setUsername] = useState("");
     const [winner, setWinner] = useState<Winner | null>(null);
     const [showModal, setShowModal] = useState<boolean>(false);
+
+    const navigate = useNavigate();
+
+    const location = useLocation();
 
     const handleClick = (
         row: number, col: number) => {
@@ -96,12 +102,23 @@ const SoloTicTacToe = () => {
     }
 
     useEffect(() => {
+        const username = location.state?.username;
+
+        if (!username) {
+            navigate("/");
+        } else {
+            setUsername(username);
+        }
+    }, []);
+
+    useEffect(() => {
         if (currentPlayer === "O" && !winner) {
             const timer = setTimeout(playBot, 500);
             return () => clearTimeout(timer);
         }
 
     }, [board, currentPlayer]);
+
 
     return (
         <div className="flex flex-col justify-center items-center gap-4">
@@ -121,7 +138,13 @@ const SoloTicTacToe = () => {
                     )}
             </div>
 
-            <WinnerInfo showModal={showModal} setShowModal={setShowModal} winner={winner} resetBoard={resetBoard}/>
+            <WinnerInfo
+                showModal={showModal}
+                setShowModal={setShowModal}
+                winner={winner}
+                resetBoard={resetBoard}
+                username={username}
+            />
         </div>
     );
 };

@@ -18,7 +18,9 @@ const Homepage = () => {
             setError("Username is required");
             return;
         }
-        navigate(`/${type.value}`)
+        navigate(`/${type.value}`, {
+            state: { username }
+        })
     }
 
 
