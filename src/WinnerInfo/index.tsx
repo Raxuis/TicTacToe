@@ -5,7 +5,7 @@ import {cn} from "../libs/utils.ts";
 type Props = {
     showModal: boolean,
     setShowModal: (showModal: boolean) => void,
-    winner: Winner,
+    winner: Winner | null,
 }
 
 const WinnerInfo = (
@@ -23,7 +23,7 @@ const WinnerInfo = (
                         </h3>
                     ) : (
                         <h3 className={cn('font-bold text-lg', textColor)}>
-                            Youhou, <span className="underline">{winner}</span> won !! 🥳
+                            Youhou, <span className="underline">{winner ?? ""}</span> won !! 🥳
                         </h3>
                     )}
                     <div className="flex justify-center gap-4 pt-2">
