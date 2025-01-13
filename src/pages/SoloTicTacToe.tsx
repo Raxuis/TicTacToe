@@ -1,15 +1,16 @@
 import {useEffect, useState} from "react";
-import {BoardPlayer, initialBoard, Player} from "../constants";
+import {BoardPlayer, initialBoard, Player, Winner} from "../constants";
 import Cell from "../Cell";
 import CurrentPlayerInfo from "../CurrentPlayerInfo";
 
 const SoloTicTacToe = () => {
     const [board, setBoard] = useState<BoardPlayer[][]>(initialBoard);
     const [currentPlayer, setCurrentPlayer] = useState<Player>("X");
-    const [winner, setWinner] = useState<Player | null>(null);
+    const [winner, setWinner] = useState<Winner | null>(null);
 
     const handleClick = (
         row: number, col: number) => {
+        console.log(row, col);
         if (board[row][col] !== "" || winner) return;
         const newBoard = board.map(
             (rowArray: BoardPlayer[], rowIndex: number) =>
@@ -20,6 +21,7 @@ const SoloTicTacToe = () => {
         )
 
         setBoard(newBoard);
+        checkWinner(newBoard);
         setCurrentPlayer("O");
     }
 
@@ -46,7 +48,28 @@ const SoloTicTacToe = () => {
         );
 
         setBoard(newBoard);
+        checkWinner(newBoard);
         setCurrentPlayer("X");
+    }
+
+    const checkWinner = (tab: BoardPlayer[][]) => {
+        const tabToCheck: BoardPlayer[][] = [
+            // Lignes
+            [tab[0][0], tab[0][1], tab[0][2]],
+            [tab[1][0], tab[1][1], tab[1][2]],
+            [tab[2][0], tab[2][1], tab[2][1]],
+            // Colonnes
+            [tab[0][0], tab[1][0], tab[2][0]],
+            [tab[0][1], tab[1][1], tab[2][1]],
+            [tab[0][2], tab[1][2], tab[1][3]],
+            // Diagonales
+            [tab[0][0], tab[1][1], tab[2][2]],
+            [tab[0][2], tab[1][1], tab[2][0]]
+        ]
+
+        if (tabToCheck.flat().every((cell) => cell !== "")) {
+            setWinner("Draw");
+        }
     }
 
     useEffect(() => {
