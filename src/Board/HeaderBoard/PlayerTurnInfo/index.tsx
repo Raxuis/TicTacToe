@@ -1,6 +1,6 @@
-import cross from "../assets/cross.svg";
-import circle from "../assets/circle.svg";
-import {Player} from "../types";
+import cross from "../../../assets/cross.svg";
+import circle from "../../../assets/circle.svg";
+import {Player} from "../../../types";
 
 const PlayerTurnInfo = ({currentPlayer}: { currentPlayer: Player }) => {
     const textColor =
@@ -8,7 +8,7 @@ const PlayerTurnInfo = ({currentPlayer}: { currentPlayer: Player }) => {
             ? "text-primary-dark"
             : "text-primary";
     return (
-        <div className="block mb-14">
+        <div className="block">
             <div className="flex gap-4 items-center justify-center bg-gray-medium rounded-lg shadow-2xl shadow-primary/10 p-2 px-4">
                 {
                     currentPlayer === "X" ? (

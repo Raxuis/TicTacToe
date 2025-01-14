@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
 import {initialBoard} from "../constants";
-import PlayerTurnInfo from "../PlayerTurnInfo";
 import WinnerInfo from "../WinnerInfo";
 import {useLocation, useNavigate} from "react-router";
 import {BoardPlayer, GameStats, Player, TicTacToesTypes, Winner} from "../types";
 import Board from "../Board";
 import PlayersInfo from "../PlayersInfo";
 import {useLocalStorage} from "../hooks/useLocalStorage.ts";
+import HeaderBoard from "../Board/HeaderBoard";
 
 const SoloTicTacToe = () => {
     const [board, setBoard] = useState<BoardPlayer[][]>(initialBoard);
@@ -133,8 +133,9 @@ const SoloTicTacToe = () => {
 
     return (
         <div className="flex flex-col justify-center items-center">
-            <PlayerTurnInfo
+            <HeaderBoard
                 currentPlayer={currentPlayer}
+                resetBoard={resetBoard}
             />
 
             <Board
