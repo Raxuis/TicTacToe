@@ -98,8 +98,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     const giveUpGame = () => {
         resetBoard();
         setGameStats({
-            username: "",
-            boardType: "",
+            ...gameStats,
             player1Wins: 0,
             ties: 0,
             player2Wins: 0
