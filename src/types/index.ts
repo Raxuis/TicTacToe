@@ -17,6 +17,7 @@ export type TicTacToesTypes = typeof ticTacToes[number]['value']
 export type PlayersInfoCellTypes = "Player1Wins" | "Player2Wins" | "Ties"
 
 export type GameStats = {
+    boardType: TicTacToesTypes
     player1Wins: number,
     ties: number,
     player2Wins: number

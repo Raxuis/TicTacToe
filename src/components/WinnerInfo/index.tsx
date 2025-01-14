@@ -47,6 +47,7 @@ const WinnerInfo = () => {
             });
         } else if (action === "QUIT") {
             setGameStats({
+                boardType: "",
                 player1Wins: 0,
                 ties: 0,
                 player2Wins: 0,
