@@ -9,8 +9,7 @@ const Cell = (
             className="bg-gray-medium size-20
             flex items-center justify-center text-xl font-bold cursor-pointer
             p-4 rounded-lg shadow-cellGreyShadow active:shadow-none
-            active:translate-y-1
-            "
+            active:translate-y-1"
             onClick={onClick}
         >
             {cellValue === "X" ? (

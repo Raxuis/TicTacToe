@@ -2,7 +2,7 @@ import cross from "../assets/cross.svg";
 import circle from "../assets/circle.svg";
 import {Player} from "../types";
 
-const CurrentPlayerInfo = ({currentPlayer}: { currentPlayer: Player }) => {
+const PlayerTurnInfo = ({currentPlayer}: { currentPlayer: Player }) => {
     const textColor =
         currentPlayer === "O"
             ? "text-primary-dark"
@@ -23,4 +23,4 @@ const CurrentPlayerInfo = ({currentPlayer}: { currentPlayer: Player }) => {
     );
 };
 
-export default CurrentPlayerInfo;
+export default PlayerTurnInfo;

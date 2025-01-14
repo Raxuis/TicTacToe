@@ -1,10 +1,12 @@
 import {useEffect, useState} from "react";
 import {initialBoard} from "../constants";
-import CurrentPlayerInfo from "../CurrentPlayerInfo";
+import PlayerTurnInfo from "../PlayerTurnInfo";
 import WinnerInfo from "../WinnerInfo";
 import {useLocation, useNavigate} from "react-router";
-import {BoardPlayer, Player, Winner} from "../types";
+import {BoardPlayer, GameStats, Player, TicTacToesTypes, Winner} from "../types";
 import Board from "../Board";
+import PlayersInfo from "../PlayersInfo";
+import {useLocalStorage} from "../hooks/useLocalStorage.ts";
 
 const SoloTicTacToe = () => {
     const [board, setBoard] = useState<BoardPlayer[][]>(initialBoard);
@@ -12,6 +14,12 @@ const SoloTicTacToe = () => {
     const [username, setUsername] = useState("");
     const [winner, setWinner] = useState<Winner | null>(null);
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [boardType, setBoardType] = useState<TicTacToesTypes>("")
+    const [gameStats, setGameStats] = useLocalStorage<GameStats>("gameStats", {
+        player1Wins: 0,
+        ties: 0,
+        player2Wins: 0
+    });
 
     const navigate = useNavigate();
 
@@ -104,11 +112,13 @@ const SoloTicTacToe = () => {
 
     useEffect(() => {
         const username = location.state?.username;
+        const boardType = location.state?.boardType;
 
-        if (!username) {
+        if (!username || !boardType) {
             navigate("/");
         } else {
             setUsername(username);
+            setBoardType(boardType);
         }
     }, []);
 
@@ -123,11 +133,13 @@ const SoloTicTacToe = () => {
 
     return (
         <div className="flex flex-col justify-center items-center gap-4">
-            <CurrentPlayerInfo
+            <PlayerTurnInfo
                 currentPlayer={currentPlayer}
             />
 
             <Board board={board} handleClick={handleClick}/>
+
+            <PlayersInfo boardType={boardType} gameStats={gameStats}/>
 
             <WinnerInfo
                 showModal={showModal}
@@ -135,6 +147,7 @@ const SoloTicTacToe = () => {
                 winner={winner}
                 resetBoard={resetBoard}
                 username={username}
+                setGameStats={setGameStats}
             />
         </div>
     );

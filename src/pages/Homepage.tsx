@@ -19,8 +19,8 @@ const Homepage = () => {
             setError("Username is required");
             return;
         }
-        navigate(`/${type.value}`, {
-            state: {username}
+        navigate(`/tic-tac-toe`, {
+            state: {username, boardType: type.value}
         })
     }
 

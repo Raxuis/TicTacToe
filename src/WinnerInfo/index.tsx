@@ -2,21 +2,27 @@ import Button from "../Button";
 import {cn} from "../libs/cn.ts";
 import {useNavigate} from "react-router";
 import {useLocalStorage} from "../hooks/useLocalStorage.ts";
-import {Winner} from "../types";
+import {GameStats, Winner} from "../types";
+import {Dispatch, SetStateAction} from "react";
+
+
+type SetGameStats = Dispatch<SetStateAction<GameStats>>;
+type setShowModal = Dispatch<SetStateAction<boolean>>;
 
 
 type Props = {
     showModal: boolean,
-    setShowModal: (showModal: boolean) => void,
+    setShowModal: setShowModal,
     resetBoard: () => void,
     winner: Winner | null,
-    username: string | null
+    username: string | null,
+    setGameStats: SetGameStats,
 }
 
 type RankingEntry = Record<string, number>;
 
 const WinnerInfo = (
-    {showModal, setShowModal, resetBoard, winner, username}: Props) => {
+    {showModal, setShowModal, resetBoard, winner, username, setGameStats}: Props) => {
 
     const navigate = useNavigate();
     const [, setRanking] = useLocalStorage<RankingEntry>("ranking", {});
@@ -29,6 +35,28 @@ const WinnerInfo = (
             }));
         }
 
+        if (action === "NEXT" && winner !== null) {
+            setGameStats((prevStats: GameStats) => {
+                const updatedStats = {...prevStats};
+
+                if (winner === "X") {
+                    updatedStats.player1Wins = (prevStats.player1Wins || 0) + 1;
+                } else if (winner === "O") {
+                    updatedStats.player2Wins = (prevStats.player2Wins || 0) + 1;
+                } else if (winner === "Draw") {
+                    updatedStats.ties = (prevStats.ties || 0) + 1;
+                }
+
+                return updatedStats;
+            });
+        } else if (action === "QUIT") {
+            setGameStats({
+                player1Wins: 0,
+                ties: 0,
+                player2Wins: 0,
+            });
+        }
+
         if (action === "NEXT") {
             resetBoard();
         } else if (action === "QUIT") {
@@ -36,7 +64,7 @@ const WinnerInfo = (
         }
 
         setShowModal(false);
-    }
+    };
 
     const textColor = winner === "O"
         ? "text-primary-dark"
@@ -60,7 +88,7 @@ const WinnerInfo = (
                                 onClick={() => handleClick("QUIT")}>
                             QUIT
                         </Button>
-                        <Button className="bg-yellow-500 text-medium-gray cursor-pointer"
+                        <Button className="bg-secondary text-medium-gray cursor-pointer"
                                 onClick={() => handleClick("NEXT")}>
                             NEXT ROUND
                         </Button>
