@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import WinnerInfo from "../components/WinnerInfo";
 import {useLocation, useNavigate} from "react-router";
 import Board from "../components/Board";
@@ -7,7 +7,6 @@ import HeaderBoard from "../components/Board/HeaderBoard";
 import {BoardContext} from "../contexts/BoardContext.tsx";
 
 const SoloTicTacToe = () => {
-    const [showModal, setShowModal] = useState<boolean>(false);
     const {
         setUsername,
         boardType,
