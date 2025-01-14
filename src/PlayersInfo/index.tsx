@@ -5,9 +5,9 @@ const PlayersInfo = ({boardType, gameStats}: { boardType: TicTacToesTypes, gameS
     const {player1Wins, player2Wins, ties} = gameStats;
     return (
         <div className="grid grid-cols-3 gap-2">
-            <PlayersInfoCell data={player1Wins} type="Player1Wins"/>
+            <PlayersInfoCell data={player1Wins} type="Player1Wins" boardType={boardType}/>
             <PlayersInfoCell data={ties} type="Ties"/>
-            <PlayersInfoCell data={player2Wins} type="Player2Wins"/>
+            <PlayersInfoCell data={player2Wins} type="Player2Wins" boardType={boardType}/>
         </div>
     );
 };
