@@ -1,64 +1,19 @@
 import Button from "../Button";
 import {cn} from "../../libs/cn.ts";
-import {useNavigate} from "react-router";
-import {useLocalStorage} from "../../hooks/useLocalStorage.ts";
-import {GameStats} from "../../types";
 import {useContext} from "react";
 import {BoardContext} from "../../contexts/BoardContext.tsx";
-
-type RankingEntry = Record<string, number>;
+import {PersistenceContext} from "../../contexts/PersistenceContext.tsx";
+import {useNavigate} from "react-router";
 
 const WinnerInfo = () => {
     const {
         winner,
-        showModal,
-        setShowModal,
-        setGameStats,
-        resetBoard,
-        username
+        showModal
     } = useContext(BoardContext);
 
+    const {handleClick} = useContext(PersistenceContext);
+
     const navigate = useNavigate();
-    const [, setRanking] = useLocalStorage<RankingEntry>("ranking", {});
-
-    const handleClick = (action: "NEXT" | "QUIT") => {
-        if (winner !== "Draw" && winner !== null && winner !== "O" && username) {
-            setRanking(prevRanking => ({
-                ...prevRanking,
-                [username]: (prevRanking[username] || 0) + 1
-            }));
-        }
-
-        if (action === "NEXT" && winner !== null) {
-            setGameStats((prevStats: GameStats) => {
-                const updatedStats = {...prevStats};
-
-                if (winner === "X") {
-                    updatedStats.player1Wins = (prevStats.player1Wins || 0) + 1;
-                } else if (winner === "O") {
-                    updatedStats.player2Wins = (prevStats.player2Wins || 0) + 1;
-                } else if (winner === "Draw") {
-                    updatedStats.ties = (prevStats.ties || 0) + 1;
-                }
-
-                return updatedStats;
-            });
-        } else if (action === "QUIT") {
-            setGameStats({
-                player1Wins: 0,
-                ties: 0,
-                player2Wins: 0,
-            });
-        }
-
-        if (action === "NEXT") {
-            resetBoard();
-        } else if (action === "QUIT") {
-            navigate('/');
-        }
-
-        setShowModal(false);
-    };
 
     const textColor = winner === "O"
         ? "text-primary-dark"
@@ -79,7 +34,10 @@ const WinnerInfo = () => {
                     )}
                     <div className="flex justify-center gap-4 pt-2">
                         <Button className="bg-primary text-medium-gray cursor-pointer"
-                                onClick={() => handleClick("QUIT")}>
+                                onClick={() => {
+                                    handleClick("QUIT");
+                                    navigate("/");
+                                }}>
                             QUIT
                         </Button>
                         <Button className="bg-secondary text-medium-gray cursor-pointer"

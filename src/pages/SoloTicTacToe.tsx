@@ -36,9 +36,7 @@ const SoloTicTacToe = () => {
 
             <Board/>
 
-            <PlayersInfo
-                boardType={boardType}
-            />
+            <PlayersInfo boardType={boardType}/>
 
             <WinnerInfo/>
         </div>
