@@ -1,8 +1,8 @@
-import {Winner} from "../constants";
 import Button from "../Button";
 import {cn} from "../libs/cn.ts";
 import {useNavigate} from "react-router";
 import {useLocalStorage} from "../hooks/useLocalStorage.ts";
+import {Winner} from "../types";
 
 
 type Props = {
@@ -22,17 +22,19 @@ const WinnerInfo = (
     const [, setRanking] = useLocalStorage<RankingEntry>("ranking", {});
 
     const handleClick = (action: "NEXT" | "QUIT") => {
-        if (action === "NEXT") {
-            resetBoard();
-        } else if (action === "QUIT") {
-            navigate('/');
-        }
         if (winner !== "Draw" && winner !== null && winner !== "O" && username) {
             setRanking(prevRanking => ({
                 ...prevRanking,
                 [username]: (prevRanking[username] || 0) + 1
             }));
         }
+
+        if (action === "NEXT") {
+            resetBoard();
+        } else if (action === "QUIT") {
+            navigate('/');
+        }
+
         setShowModal(false);
     }
 
