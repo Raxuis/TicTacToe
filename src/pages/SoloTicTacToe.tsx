@@ -1,9 +1,10 @@
 import {useEffect, useState} from "react";
-import {BoardPlayer, initialBoard, Player, Winner} from "../constants";
+import {initialBoard} from "../constants";
 import Cell from "../Cell";
 import CurrentPlayerInfo from "../CurrentPlayerInfo";
 import WinnerInfo from "../WinnerInfo";
 import {useLocation, useNavigate} from "react-router";
+import {BoardPlayer, Player, Winner} from "../types";
 
 const SoloTicTacToe = () => {
     const [board, setBoard] = useState<BoardPlayer[][]>(initialBoard);
@@ -122,7 +123,9 @@ const SoloTicTacToe = () => {
 
     return (
         <div className="flex flex-col justify-center items-center gap-4">
-            <CurrentPlayerInfo currentPlayer={currentPlayer}/>
+            <CurrentPlayerInfo
+                currentPlayer={currentPlayer}
+            />
 
             <div className="grid grid-cols-3 gap-2">
                 {

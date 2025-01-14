@@ -1,8 +1,4 @@
-export type Player = "X" | "O";
-
-export type Winner = Player | "Draw";
-
-export type BoardPlayer = Player | "";
+import {BoardPlayer, TicTacToe} from "../types";
 
 export const initialBoard: BoardPlayer[][] = [
     ["", "", ""],
@@ -10,10 +6,6 @@ export const initialBoard: BoardPlayer[][] = [
     ["", "", ""]
 ];
 
-export type TicTacToe = {
-    title: string;
-    value: string;
-}
 
 export const ticTacToes: TicTacToe[] = [
     {

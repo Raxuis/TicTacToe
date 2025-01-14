@@ -1,7 +1,8 @@
 import {FormEvent, useState} from "react";
-import {ticTacToes, TicTacToe} from "../constants";
+import {ticTacToes} from "../constants";
 import Button from "../Button";
 import {useNavigate} from "react-router";
+import {TicTacToe} from "../types";
 
 const Homepage = () => {
     const [type, setType] = useState<TicTacToe>({
@@ -19,7 +20,7 @@ const Homepage = () => {
             return;
         }
         navigate(`/${type.value}`, {
-            state: { username }
+            state: {username}
         })
     }
 

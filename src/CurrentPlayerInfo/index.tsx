@@ -1,6 +1,6 @@
-import {Player} from "../constants";
 import cross from "../assets/cross.svg";
 import circle from "../assets/circle.svg";
+import {Player} from "../types";
 
 const CurrentPlayerInfo = ({currentPlayer}: { currentPlayer: Player }) => {
     const textColor =
