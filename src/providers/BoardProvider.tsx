@@ -13,6 +13,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [boardType, setBoardType] = useState<TicTacToesTypes>("")
     const [gameStats, setGameStats] = useLocalStorage<GameStats>("gameStats", {
+        username: "",
         boardType: "",
         player1Wins: 0,
         ties: 0,
@@ -97,6 +98,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     const giveUpGame = () => {
         resetBoard();
         setGameStats({
+            username: "",
             boardType: "",
             player1Wins: 0,
             ties: 0,
@@ -122,13 +124,14 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     }, [board, currentPlayer]);
 
     useEffect(() => {
-        if (boardType != "") {
+        if (boardType !== "" && username !== "") {
             setGameStats({
                 ...gameStats,
-                boardType
+                boardType,
+                username
             })
         }
-    }, [boardType]);
+    }, [username, boardType]);
 
 
     const contextValue = {
