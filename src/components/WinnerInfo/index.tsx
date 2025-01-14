@@ -20,11 +20,12 @@ const WinnerInfo = () => {
         setShowModal,
         username,
         setGameStats,
-        resetBoard
+        resetBoard,
+        gameTypeIsSolo
     } = useContext(BoardContext);
 
     const handleClick = (action: "NEXT" | "QUIT") => {
-        if (winner !== "Draw" && winner !== null && winner !== "O" && username) {
+        if (winner !== "Draw" && winner !== null && winner !== "O" && username && gameTypeIsSolo) {
             setRanking(prevRanking => ({
                 ...prevRanking,
                 [username]: (prevRanking[username] || 0) + 1

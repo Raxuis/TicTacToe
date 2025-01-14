@@ -1,14 +1,14 @@
 import {Route, Routes} from "react-router";
 import Homepage from "./pages/Homepage.tsx";
 import Layout from "./Layout";
-import SoloTicTacToe from "./pages/SoloTicTacToe.tsx";
+import TicTacToe from "./pages/TicTacToe.tsx";
 
 function App() {
     return (
         <Layout>
             <Routes>
                 <Route path="/" element={<Homepage/>}/>
-                <Route path="/tic-tac-toe" element={<SoloTicTacToe/>}/>
+                <Route path="/tic-tac-toe" element={<TicTacToe/>}/>
             </Routes>
         </Layout>
     )

@@ -15,14 +15,15 @@ const Homepage = () => {
     const [error, setError] = useState<string>();
 
     const {
-        gameStats
+        gameStats,
+        gameTypeIsSolo
     } = useContext(BoardContext);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>, action: "RESUME" | "START") => {
         e.preventDefault()
 
         if (action === "START") {
-            if ((type.value === "solo" || type.value === "solo-special") && !username || username === "") {
+            if (gameTypeIsSolo && !username || username === "") {
                 setError("Username is required");
                 return;
             }

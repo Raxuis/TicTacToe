@@ -22,7 +22,9 @@ type BoardContextType = {
     gameStats: GameStats;
     setGameStats: Dispatch<SetStateAction<GameStats>>;
     storedBoard: BoardPlayer[][];
-    setStoredBoard: Dispatch<SetStateAction<BoardPlayer[][]>>
+    setStoredBoard: Dispatch<SetStateAction<BoardPlayer[][]>>,
+    gameTypeIsSolo: boolean;
+    switchCurrentPlayer: () => void;
 }
 
 export const BoardContext = createContext<BoardContextType>({
@@ -63,5 +65,8 @@ export const BoardContext = createContext<BoardContextType>({
     },
     storedBoard: initialBoard,
     setStoredBoard: () => {
+    },
+    gameTypeIsSolo: false,
+    switchCurrentPlayer: () => {
     }
 });

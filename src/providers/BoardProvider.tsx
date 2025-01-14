@@ -21,6 +21,12 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     });
     const [storedBoard, setStoredBoard] = useLocalStorage<BoardPlayer[][]>("board", initialBoard);
 
+    const gameTypeIsSolo = (boardType === "solo" || boardType === "solo-special");
+
+    const switchCurrentPlayer = () => {
+        setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
+    }
+
 
     const playBot = () => {
         if (winner) return;
@@ -46,7 +52,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         setBoard(newBoard);
         setStoredBoard(newBoard);
         checkWinner(newBoard);
-        setCurrentPlayer("X");
+        switchCurrentPlayer();
     }
 
 
@@ -115,7 +121,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     }, []);
 
     useEffect(() => {
-        if (currentPlayer === "O" && !winner) {
+        if ((gameTypeIsSolo && currentPlayer === "O") && !winner) {
             const timer = setTimeout(playBot, 500);
             return () => clearTimeout(timer);
         }
@@ -153,7 +159,9 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         setGameStats,
         storedBoard,
         setStoredBoard,
-        giveUpGame
+        giveUpGame,
+        gameTypeIsSolo,
+        switchCurrentPlayer
     }
 
     return (

@@ -10,13 +10,17 @@ const Board = () => {
         winner,
         setBoard,
         checkWinner,
-        setCurrentPlayer
+        switchCurrentPlayer,
+        gameTypeIsSolo
     } = useContext(BoardContext);
 
     const handleClick = (
         row: number, col: number) => {
 
-        if (board[row][col] !== "" || currentPlayer === "O" || winner) return;
+        if (
+            board[row][col] !== "" ||
+            (gameTypeIsSolo && currentPlayer === "O")
+            || winner) return;
 
         const newBoard = board.map(
             (rowArray: BoardPlayer[], rowIndex: number) =>
@@ -28,7 +32,7 @@ const Board = () => {
 
         setBoard(newBoard);
         checkWinner(newBoard);
-        setCurrentPlayer("O");
+        switchCurrentPlayer();
     }
 
     return (
