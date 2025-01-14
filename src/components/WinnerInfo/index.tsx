@@ -56,11 +56,8 @@ const WinnerInfo = () => {
             });
         }
 
-        if (action === "NEXT") {
+        if (action === "NEXT" || action === "QUIT") {
             resetBoard();
-        } else if (action === "QUIT") {
-            resetBoard();
-            setStoredBoard(initialBoard);
         }
 
         setShowModal(false);

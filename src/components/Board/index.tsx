@@ -9,6 +9,7 @@ const Board = () => {
         currentPlayer,
         winner,
         setBoard,
+        setStoredBoard,
         checkWinner,
         switchCurrentPlayer,
         gameTypeIsSolo
@@ -31,6 +32,7 @@ const Board = () => {
         )
 
         setBoard(newBoard);
+        setStoredBoard(newBoard);
         checkWinner(newBoard);
         switchCurrentPlayer();
     }

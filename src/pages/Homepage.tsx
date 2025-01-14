@@ -42,7 +42,11 @@ const Homepage = () => {
         <div className="w-full bg-white rounded-2xl flex flex-col gap-5 p-5 mt-10">
             <p className="text-xl">Homepage</p>
             {
-                (gameStats.boardType && gameStats.username) ? (
+                (
+                    (!gameTypeIsSolo && gameStats.boardType)
+                    ||
+                    (gameTypeIsSolo && gameStats.boardType && gameStats.username)
+                ) ? (
                     <form
                         onSubmit={(e) => handleSubmit(e, "RESUME")}
                         className="flex flex-col max-w-sm w-full space-y-2 mx-auto">
