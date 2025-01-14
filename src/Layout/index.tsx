@@ -1,9 +1,13 @@
 import {ReactNode} from "react";
+import Header from "../components/Header";
 
 const Layout = ({children}: { children: ReactNode }) => {
     return (
-        <div className="font-space-grotesk">
-            {children}
+        <div className="bg-gray-dark min-h-screen min-w-screen">
+            <div className="w-screen max-w-5xl mx-auto py-5 font-space-grotesk">
+                <Header/>
+                {children}
+            </div>
         </div>
     );
 };
