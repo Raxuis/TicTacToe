@@ -1,10 +1,9 @@
 import cross from "../../../../assets/cross.svg";
 import circle from "../../../../assets/circle.svg";
-import {useContext} from "react";
-import {BoardContext} from "../../../../contexts/BoardContext.tsx";
+import {useBoard} from "../../../../hooks/useBoard.tsx";
 
 const PlayerTurnInfo = () => {
-    const {currentPlayer} = useContext(BoardContext);
+    const {currentPlayer} = useBoard();
 
     const textColor =
         currentPlayer === "O"

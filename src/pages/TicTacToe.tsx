@@ -1,11 +1,11 @@
-import {useContext, useEffect} from "react";
+import {useEffect} from "react";
 import WinnerInfo from "../components/WinnerInfo";
 import {useLocation, useNavigate} from "react-router";
 import Board from "../components/Board";
 import PlayersInfo from "../components/PlayersInfo";
 import HeaderBoard from "../components/Board/HeaderBoard";
-import {BoardContext} from "../contexts/BoardContext.tsx";
 import {TicTacToesTypes} from "../types";
+import {useBoard} from "../hooks/useBoard.tsx";
 
 const TicTacToe = () => {
     const {
@@ -13,7 +13,7 @@ const TicTacToe = () => {
         boardType,
         setBoardType,
         gameTypeIsSolo
-    } = useContext(BoardContext);
+    } = useBoard();
 
     const navigate = useNavigate();
 

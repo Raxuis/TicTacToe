@@ -1,9 +1,9 @@
-import {FormEvent, useContext, useState} from "react";
+import {FormEvent, useState} from "react";
 import {ticTacToes} from "../constants";
 import Button from "../components/Button";
 import {useNavigate} from "react-router";
 import {TicTacToe} from "../types";
-import {BoardContext} from "../contexts/BoardContext.tsx";
+import {useBoard} from "../hooks/useBoard.tsx";
 
 const Homepage = () => {
     const [type, setType] = useState<TicTacToe>({
@@ -14,10 +14,7 @@ const Homepage = () => {
     const navigate = useNavigate();
     const [error, setError] = useState<string>();
 
-    const {
-        gameStats,
-        gameTypeIsSolo
-    } = useContext(BoardContext);
+    const {gameStats, gameTypeIsSolo} = useBoard();
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>, action: "RESUME" | "START") => {
         e.preventDefault()
