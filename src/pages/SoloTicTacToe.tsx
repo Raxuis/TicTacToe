@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import {initialBoard} from "../constants";
-import Cell from "../Cell";
 import CurrentPlayerInfo from "../CurrentPlayerInfo";
 import WinnerInfo from "../WinnerInfo";
 import {useLocation, useNavigate} from "react-router";
 import {BoardPlayer, Player, Winner} from "../types";
+import Board from "../Board";
 
 const SoloTicTacToe = () => {
     const [board, setBoard] = useState<BoardPlayer[][]>(initialBoard);
@@ -127,19 +127,7 @@ const SoloTicTacToe = () => {
                 currentPlayer={currentPlayer}
             />
 
-            <div className="grid grid-cols-3 gap-2">
-                {
-                    board.map((row, rowIndex) =>
-                        row.map((cellValue, colIndex) => {
-                            return (
-                                <Cell cellValue={cellValue}
-                                      key={`${rowIndex}-${colIndex}`}
-                                      onClick={() => handleClick(rowIndex, colIndex)}
-                                />
-                            )
-                        })
-                    )}
-            </div>
+            <Board board={board} handleClick={handleClick}/>
 
             <WinnerInfo
                 showModal={showModal}
