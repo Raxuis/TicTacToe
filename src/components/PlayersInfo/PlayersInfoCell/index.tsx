@@ -1,7 +1,6 @@
 import {PlayersInfoCellTypes} from "../../../types";
 import {cn} from "../../../libs/cn.ts";
-import {useContext} from "react";
-import {BoardContext} from "../../../contexts/BoardContext.tsx";
+import {useBoard} from "../../../hooks/useBoard.tsx";
 
 type PlayersInfoCellProps = {
     data: number,
@@ -9,7 +8,7 @@ type PlayersInfoCellProps = {
 }
 
 const PlayersInfoCell = ({data, type}: PlayersInfoCellProps) => {
-    const {gameTypeIsSolo} = useContext(BoardContext);
+    const {gameTypeIsSolo} = useBoard();
 
     let textToShow: string = type === "Player1Wins"
         ? "X"

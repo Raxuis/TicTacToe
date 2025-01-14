@@ -1,10 +1,9 @@
 import {RotateCcw} from "lucide-react";
 import Button from "../../../Button";
-import {useContext} from "react";
-import {BoardContext} from "../../../../contexts/BoardContext.tsx";
+import {useBoard} from "../../../../hooks/useBoard.tsx";
 
 const ResetButton = () => {
-    const {giveUpGame} = useContext(BoardContext);
+    const {giveUpGame} = useBoard();
     return (
         <Button onClick={() => giveUpGame()}
                 className="bg-primary text-gray-dark shadow-buttonGreyLight active:shadow-none active:translate-y-1">

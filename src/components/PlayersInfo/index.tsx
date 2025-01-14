@@ -1,10 +1,9 @@
 import {TicTacToesTypes} from "../../types";
 import PlayersInfoCell from "./PlayersInfoCell";
-import {BoardContext} from "../../contexts/BoardContext.tsx";
-import {useContext} from "react";
+import {useBoard} from "../../hooks/useBoard.tsx";
 
 const PlayersInfo = ({boardType}: { boardType: TicTacToesTypes }) => {
-    const {gameStats} = useContext(BoardContext);
+    const {gameStats} = useBoard();
 
     const {
         player1Wins,

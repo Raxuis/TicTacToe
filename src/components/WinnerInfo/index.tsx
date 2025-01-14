@@ -1,11 +1,10 @@
 import Button from "../Button";
 import {cn} from "../../libs/cn.ts";
-import {useContext} from "react";
-import {BoardContext} from "../../contexts/BoardContext.tsx";
 import {useNavigate} from "react-router";
 import {useLocalStorage} from "../../hooks/useLocalStorage.ts";
 import {BoardPlayer, GameStats} from "../../types";
 import {initialBoard} from "../../constants";
+import {useBoard} from "../../hooks/useBoard.tsx";
 
 type RankingEntry = Record<string, number>;
 
@@ -22,7 +21,7 @@ const WinnerInfo = () => {
         setGameStats,
         resetBoard,
         gameTypeIsSolo
-    } = useContext(BoardContext);
+    } = useBoard();
 
     const handleClick = (action: "NEXT" | "QUIT") => {
         if (winner !== "Draw" && winner !== null && winner !== "O" && username && gameTypeIsSolo) {

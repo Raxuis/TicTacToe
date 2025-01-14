@@ -2,7 +2,7 @@ import {createContext, SetStateAction, Dispatch} from "react";
 import {BoardPlayer, GameStats, Player, TicTacToesTypes, Winner} from "../types";
 import {initialBoard} from "../constants";
 
-type BoardContextType = {
+export type BoardContextType = {
     giveUpGame: () => void;
     resetBoard: () => void;
     board: BoardPlayer[][];

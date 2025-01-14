@@ -1,7 +1,6 @@
 import Cell from "./Cell";
-import {useContext} from "react";
-import {BoardContext} from "../../contexts/BoardContext.tsx";
 import {BoardPlayer} from "../../types";
+import {useBoard} from "../../hooks/useBoard.tsx";
 
 const Board = () => {
     const {
@@ -13,7 +12,7 @@ const Board = () => {
         checkWinner,
         switchCurrentPlayer,
         gameTypeIsSolo
-    } = useContext(BoardContext);
+    } = useBoard();
 
     const handleClick = (
         row: number, col: number) => {
