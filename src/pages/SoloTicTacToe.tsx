@@ -132,14 +132,20 @@ const SoloTicTacToe = () => {
 
 
     return (
-        <div className="flex flex-col justify-center items-center gap-4">
+        <div className="flex flex-col justify-center items-center">
             <PlayerTurnInfo
                 currentPlayer={currentPlayer}
             />
 
-            <Board board={board} handleClick={handleClick}/>
+            <Board
+                board={board}
+                handleClick={handleClick}
+            />
 
-            <PlayersInfo boardType={boardType} gameStats={gameStats}/>
+            <PlayersInfo
+                boardType={boardType}
+                gameStats={gameStats}
+            />
 
             <WinnerInfo
                 showModal={showModal}

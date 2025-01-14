@@ -1,4 +1,5 @@
 import {PlayersInfoCellTypes, TicTacToesTypes} from "../../types";
+import {cn} from "../../libs/cn.ts";
 
 type PlayersInfoCellProps = {
     data: number,
@@ -7,33 +8,30 @@ type PlayersInfoCellProps = {
 }
 
 const PlayersInfoCell = ({data, type, boardType}: PlayersInfoCellProps) => {
+    let textToShow: string = type === "Player1Wins"
+        ? "X"
+        : type === "Ties"
+            ? "Ties"
+            : "O";
+
+    if (boardType === "solo" && type === "Player1Wins") {
+        textToShow += '(You)';
+    }
+    if (boardType === "solo" && type === "Player2Wins") {
+        textToShow += '(CPU)';
+    }
+
     return (
-        type === "Player1Wins" ? (
-            <div
-                className="bg-gray-light-dark size-20 flex flex-col items-center justify-center text-xl font-bold cursor-pointer p-4 rounded-lg">
+        <div className={
+            cn('h-20 w-24 flex flex-col items-center justify-center text-xl font-bold cursor-pointer p-4 rounded-lg',
+                type === "Player1Wins" ? 'bg-gray-light-dark' : type === "Ties" ? 'bg-gray-light' : 'bg-secondary')
+        }>
                 <span className="uppercase">
-                    X
-                    {boardType === "solo" ? "(You)" : null}
+                    {textToShow}
+
                 </span>
-                {data}
-            </div>
-        ) : type === "Ties" ? (
-                <div
-                    className="bg-gray-light size-20 flex flex-col items-center justify-center text-lg font-bold cursor-pointer p-4 rounded-lg">
-                    <span className="uppercase">Ties</span>
-                    {data}
-                </div>
-            )
-            : (
-                <div
-                    className="bg-secondary size-20 flex flex-col items-center justify-center text-xl font-bold cursor-pointer p-4 rounded-lg">
-                    <span className="uppercase">
-                        O
-                        {boardType === "solo" ? "(CPU)" : null}
-                    </span>
-                    {data}
-                </div>
-            )
+            {data}
+        </div>
     );
 };
 

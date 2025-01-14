@@ -6,7 +6,7 @@ const Cell = (
     {cellValue, onClick}: { cellValue: BoardPlayer, onClick: () => void }) => {
     return (
         <div
-            className="bg-gray-medium size-20
+            className="bg-gray-medium size-24
             flex items-center justify-center text-xl font-bold cursor-pointer
             p-4 rounded-lg shadow-cellGreyShadow active:shadow-none
             active:translate-y-1"

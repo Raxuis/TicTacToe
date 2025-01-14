@@ -4,7 +4,7 @@ import PlayersInfoCell from "./PlayersInfoCell";
 const PlayersInfo = ({boardType, gameStats}: { boardType: TicTacToesTypes, gameStats: GameStats }) => {
     const {player1Wins, player2Wins, ties} = gameStats;
     return (
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-4 pt-6">
             <PlayersInfoCell data={player1Wins} type="Player1Wins" boardType={boardType}/>
             <PlayersInfoCell data={ties} type="Ties"/>
             <PlayersInfoCell data={player2Wins} type="Player2Wins" boardType={boardType}/>

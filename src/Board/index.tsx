@@ -5,7 +5,7 @@ const Board = (
     {board, handleClick}: { board: BoardPlayer[][], handleClick: Function }
 ) => {
     return (
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-x-4 gap-y-6 place-items-center">
             {
                 board.map((row, rowIndex) =>
                     row.map((cellValue, colIndex) => {
