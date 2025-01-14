@@ -19,25 +19,6 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     });
     const [storedBoard, setStoredBoard] = useLocalStorage<BoardPlayer[][]>("board", initialBoard);
 
-    const handleClick = (
-        row: number, col: number) => {
-
-        if (board[row][col] !== "" || currentPlayer === "O" || winner) return;
-
-        const newBoard = board.map(
-            (rowArray: BoardPlayer[], rowIndex: number) =>
-                rowArray.map(
-                    (cell: BoardPlayer, colIndex: number) =>
-                        rowIndex === row && colIndex === col ? currentPlayer : cell
-                )
-        )
-
-        setBoard(newBoard);
-        setStoredBoard(newBoard);
-        checkWinner(newBoard);
-        setCurrentPlayer("O");
-    }
-
 
     const playBot = () => {
         if (winner) return;
@@ -112,6 +93,15 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         setWinner(null);
     }
 
+    const giveUpGame  = () => {
+        resetBoard();
+        setGameStats({
+            player1Wins: 0,
+            ties: 0,
+            player2Wins: 0
+        });
+    }
+
     useEffect(() => {
         if (storedBoard) {
             setBoard(storedBoard);
@@ -142,7 +132,6 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         setShowModal,
         resetBoard,
         playBot,
-        handleClick,
         username,
         setUsername,
         boardType,
@@ -151,6 +140,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         setGameStats,
         storedBoard,
         setStoredBoard,
+        giveUpGame
     }
 
     return (

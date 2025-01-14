@@ -3,6 +3,7 @@ import {BoardPlayer, GameStats, Player, TicTacToesTypes, Winner} from "../types"
 import {initialBoard} from "../constants";
 
 type BoardContextType = {
+    giveUpGame: () => void;
     resetBoard: () => void;
     board: BoardPlayer[][];
     setBoard: Dispatch<SetStateAction<BoardPlayer[][]>>;
@@ -14,7 +15,6 @@ type BoardContextType = {
     showModal: boolean;
     setShowModal: Dispatch<SetStateAction<boolean>>;
     playBot: () => void;
-    handleClick: (row: number, col: number) => void;
     username: string;
     setUsername: Dispatch<SetStateAction<string>>;
     boardType: TicTacToesTypes;
@@ -26,6 +26,8 @@ type BoardContextType = {
 }
 
 export const BoardContext = createContext<BoardContextType>({
+    giveUpGame: () => {
+    },
     resetBoard: () => {
     },
     board: initialBoard,
@@ -43,8 +45,6 @@ export const BoardContext = createContext<BoardContextType>({
     setShowModal: () => {
     },
     playBot: () => {
-    },
-    handleClick: () => {
     },
     username: "",
     setUsername: () => {
