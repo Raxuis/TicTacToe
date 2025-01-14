@@ -21,29 +21,45 @@ type BoardContextType = {
     setBoardType: Dispatch<SetStateAction<TicTacToesTypes>>;
     gameStats: GameStats;
     setGameStats: Dispatch<SetStateAction<GameStats>>;
+    storedBoard: BoardPlayer[][];
+    setStoredBoard: Dispatch<SetStateAction<BoardPlayer[][]>>
 }
 
 export const BoardContext = createContext<BoardContextType>({
-    resetBoard: () => {},
+    resetBoard: () => {
+    },
     board: initialBoard,
-    setBoard: () => {},
+    setBoard: () => {
+    },
     currentPlayer: "X",
-    setCurrentPlayer: () => {},
+    setCurrentPlayer: () => {
+    },
     winner: null,
-    setWinner: () => {},
-    checkWinner: () => {},
+    setWinner: () => {
+    },
+    checkWinner: () => {
+    },
     showModal: false,
-    setShowModal: () => {},
-    playBot: () => {},
-    handleClick: () => {},
+    setShowModal: () => {
+    },
+    playBot: () => {
+    },
+    handleClick: () => {
+    },
     username: "",
-    setUsername: () => {},
+    setUsername: () => {
+    },
     boardType: "",
-    setBoardType: () => {},
+    setBoardType: () => {
+    },
     gameStats: {
         player1Wins: 0,
         ties: 0,
         player2Wins: 0
     },
-    setGameStats: () => {}
+    setGameStats: () => {
+    },
+    storedBoard: initialBoard,
+    setStoredBoard: () => {
+    }
 });

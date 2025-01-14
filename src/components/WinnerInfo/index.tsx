@@ -2,16 +2,66 @@ import Button from "../Button";
 import {cn} from "../../libs/cn.ts";
 import {useContext} from "react";
 import {BoardContext} from "../../contexts/BoardContext.tsx";
-import {PersistenceContext} from "../../contexts/PersistenceContext.tsx";
 import {useNavigate} from "react-router";
+import {useLocalStorage} from "../../hooks/useLocalStorage.ts";
+import {BoardPlayer, GameStats} from "../../types";
+import {initialBoard} from "../../constants";
+
+type RankingEntry = Record<string, number>;
+
 
 const WinnerInfo = () => {
+    const [, setStoredBoard] = useLocalStorage<BoardPlayer[][]>("board", initialBoard);
+    const [, setRanking] = useLocalStorage<RankingEntry>("ranking", {});
+
     const {
         winner,
-        showModal
+        showModal,
+        setShowModal,
+        username,
+        setGameStats,
+        resetBoard
     } = useContext(BoardContext);
 
-    const {handleClick} = useContext(PersistenceContext);
+    const handleClick = (action: "NEXT" | "QUIT") => {
+        if (winner !== "Draw" && winner !== null && winner !== "O" && username) {
+            setRanking(prevRanking => ({
+                ...prevRanking,
+                [username]: (prevRanking[username] || 0) + 1
+            }));
+        }
+
+        if (action === "NEXT" && winner !== null) {
+            setGameStats((prevStats: GameStats) => {
+                const updatedStats = {...prevStats};
+
+                if (winner === "X") {
+                    updatedStats.player1Wins = (prevStats.player1Wins || 0) + 1;
+                } else if (winner === "O") {
+                    updatedStats.player2Wins = (prevStats.player2Wins || 0) + 1;
+                } else if (winner === "Draw") {
+                    updatedStats.ties = (prevStats.ties || 0) + 1;
+                }
+
+                return updatedStats;
+            });
+        } else if (action === "QUIT") {
+            setGameStats({
+                player1Wins: 0,
+                ties: 0,
+                player2Wins: 0,
+            });
+        }
+
+        if (action === "NEXT") {
+            resetBoard();
+        } else if (action === "QUIT") {
+            resetBoard();
+            setStoredBoard(initialBoard);
+        }
+
+        setShowModal(false);
+    };
 
     const navigate = useNavigate();
 

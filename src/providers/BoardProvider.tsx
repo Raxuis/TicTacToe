@@ -17,6 +17,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         ties: 0,
         player2Wins: 0
     });
+    const [storedBoard, setStoredBoard] = useLocalStorage<BoardPlayer[][]>("board", initialBoard);
 
     const handleClick = (
         row: number, col: number) => {
@@ -32,6 +33,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         )
 
         setBoard(newBoard);
+        setStoredBoard(newBoard);
         checkWinner(newBoard);
         setCurrentPlayer("O");
     }
@@ -59,6 +61,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         );
 
         setBoard(newBoard);
+        setStoredBoard(newBoard);
         checkWinner(newBoard);
         setCurrentPlayer("X");
     }
@@ -83,12 +86,14 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
             if (row.every(cell => cell === "X")) {
                 setWinner("X");
                 setShowModal(true);
+                setStoredBoard(initialBoard);
                 return
             }
 
             if (row.every(cell => cell === "O")) {
                 setWinner("O");
                 setShowModal(true);
+                setStoredBoard(initialBoard);
                 return
             }
         }
@@ -96,14 +101,25 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         if (tabToCheck.flat().every((cell) => cell !== "")) {
             setWinner("Draw");
             setShowModal(true);
+            setStoredBoard(initialBoard);
         }
     }
 
     const resetBoard = () => {
         setBoard(initialBoard);
+        setStoredBoard(initialBoard);
         setCurrentPlayer("X");
         setWinner(null);
     }
+
+    useEffect(() => {
+        if (storedBoard) {
+            setBoard(storedBoard);
+            checkWinner(storedBoard);
+        } else {
+            setStoredBoard(initialBoard);
+        }
+    }, []);
 
     useEffect(() => {
         if (currentPlayer === "O" && !winner) {
@@ -112,7 +128,6 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         }
 
     }, [board, currentPlayer]);
-
 
 
     const contextValue = {
@@ -133,7 +148,9 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         boardType,
         setBoardType,
         gameStats,
-        setGameStats
+        setGameStats,
+        storedBoard,
+        setStoredBoard,
     }
 
     return (
