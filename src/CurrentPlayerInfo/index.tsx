@@ -9,7 +9,7 @@ const CurrentPlayerInfo = ({currentPlayer}: { currentPlayer: Player }) => {
             : "text-primary";
     return (
         <div className="block">
-            <div className="flex gap-4 items-center justify-center bg-medium-gray rounded-lg shadow-2xl shadow-primary/10 p-2 px-4">
+            <div className="flex gap-4 items-center justify-center bg-gray-medium rounded-lg shadow-2xl shadow-primary/10 p-2 px-4">
                 {
                     currentPlayer === "X" ? (
                         <img src={cross} alt="cross" className="object-cover size-5"/>

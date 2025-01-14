@@ -12,7 +12,7 @@ const Button = ({children, className, onClick, type = 'button', ...props}: Butto
     return (
         <button
             type={type}
-            className={cn('block bg-medium-gray rounded-lg shadow-2xl shadow-primary/10 p-2 px-4', className)}
+            className={cn('block bg-gray-medium rounded-lg shadow-2xl shadow-primary/10 p-2 px-4', className)}
             onClick={onClick}
             {...props}
         >

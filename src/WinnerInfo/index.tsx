@@ -19,7 +19,7 @@ const WinnerInfo = (
     {showModal, setShowModal, resetBoard, winner, username}: Props) => {
 
     const navigate = useNavigate();
-    const [ranking, setRanking] = useLocalStorage<RankingEntry>("ranking", {});
+    const [, setRanking] = useLocalStorage<RankingEntry>("ranking", {});
 
     const handleClick = (action: "NEXT" | "QUIT") => {
         if (action === "NEXT") {
@@ -43,7 +43,7 @@ const WinnerInfo = (
     return (
         showModal && (
             <dialog id="my_modal_2" className="modal bg-black/50" open={showModal}>
-                <div className="modal-box bg-medium-gray">
+                <div className="modal-box bg-gray-medium">
                     {winner === "Draw" ? (
                         <h3 className="font-bold text-lg">
                             Ahhh, that's a draw...

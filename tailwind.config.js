@@ -14,16 +14,18 @@ export default {
         secondary: {
           DEFAULT: "#F6BC47"
         },
-        "light-gray": {
-          DEFAULT: "#B6CAD3",
-          dark: "#7D9AA7"
-        },
-        "medium-gray": {
-          DEFAULT: "#284551",
-          dark: "#132C36",
-        },
-        "dark-gray": {
-          DEFAULT: "#203741",
+        gray: {
+          dark: {
+            DEFAULT: "#203741",
+          },
+          light: {
+            DEFAULT: "#B6CAD3",
+            dark: "#7D9AA7"
+          },
+          medium: {
+            DEFAULT: "#284551",
+            dark: "#132C36",
+          }
         },
         cell: {
           DEFAULT: "#1f3640",
@@ -31,6 +33,12 @@ export default {
       },
       fontFamily: {
         "space-grotesk": ['Space Grotesk', 'sans-serif']
+      },
+      boxShadow: {
+        buttonSecondary: '0px 4px 0px 0px #CE8E14',
+        buttonGreyLight: '0px 4px 0px 0px #7D9AA7',
+        buttonGrey: '0px 4px 0px 0px #132C36',
+        cellGreyShadow: '0px 7px 0px 0px #132C36'
       }
     },
   },
