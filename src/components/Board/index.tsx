@@ -1,9 +1,10 @@
 import Cell from "./Cell";
-import {BoardPlayer} from "../types";
+import {useContext} from "react";
+import {BoardContext} from "../../contexts/BoardContext.tsx";
 
-const Board = (
-    {board, handleClick}: { board: BoardPlayer[][], handleClick: Function }
-) => {
+const Board = () => {
+    const {board, handleClick} = useContext(BoardContext);
+
     return (
         <div className="grid grid-cols-3 gap-x-4 gap-y-6 place-items-center">
             {

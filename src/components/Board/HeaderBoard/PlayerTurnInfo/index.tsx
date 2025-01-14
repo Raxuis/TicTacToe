@@ -1,15 +1,19 @@
-import cross from "../../../assets/cross.svg";
-import circle from "../../../assets/circle.svg";
-import {Player} from "../../../types";
+import cross from "../../../../assets/cross.svg";
+import circle from "../../../../assets/circle.svg";
+import {useContext} from "react";
+import {BoardContext} from "../../../../contexts/BoardContext.tsx";
 
-const PlayerTurnInfo = ({currentPlayer}: { currentPlayer: Player }) => {
+const PlayerTurnInfo = () => {
+    const {currentPlayer} = useContext(BoardContext);
+
     const textColor =
         currentPlayer === "O"
             ? "text-primary-dark"
             : "text-primary";
     return (
         <div className="block">
-            <div className="flex gap-4 items-center justify-center bg-gray-medium rounded-lg shadow-2xl shadow-primary/10 p-2 px-4">
+            <div
+                className="flex gap-4 items-center justify-center bg-gray-medium rounded-lg shadow-2xl shadow-primary/10 p-2 px-4">
                 {
                     currentPlayer === "X" ? (
                         <img src={cross} alt="cross" className="object-cover size-5"/>

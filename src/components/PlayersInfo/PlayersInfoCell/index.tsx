@@ -1,5 +1,5 @@
-import {PlayersInfoCellTypes, TicTacToesTypes} from "../../types";
-import {cn} from "../../libs/cn.ts";
+import {PlayersInfoCellTypes, TicTacToesTypes} from "../../../types";
+import {cn} from "../../../libs/cn.ts";
 
 type PlayersInfoCellProps = {
     data: number,

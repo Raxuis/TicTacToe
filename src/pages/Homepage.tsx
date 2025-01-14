@@ -1,6 +1,6 @@
 import {FormEvent, useState} from "react";
 import {ticTacToes} from "../constants";
-import Button from "../Button";
+import Button from "../components/Button";
 import {useNavigate} from "react-router";
 import {TicTacToe} from "../types";
 

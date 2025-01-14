@@ -1,8 +1,17 @@
-import {GameStats, TicTacToesTypes} from "../types";
+import {TicTacToesTypes} from "../../types";
 import PlayersInfoCell from "./PlayersInfoCell";
+import {BoardContext} from "../../contexts/BoardContext.tsx";
+import {useContext} from "react";
 
-const PlayersInfo = ({boardType, gameStats}: { boardType: TicTacToesTypes, gameStats: GameStats }) => {
-    const {player1Wins, player2Wins, ties} = gameStats;
+const PlayersInfo = ({boardType}: { boardType: TicTacToesTypes }) => {
+    const {gameStats} = useContext(BoardContext);
+
+    const {
+        player1Wins,
+        player2Wins,
+        ties
+    } = gameStats;
+
     return (
         <div className="grid grid-cols-3 gap-4 pt-6">
             <PlayersInfoCell data={player1Wins} type="Player1Wins" boardType={boardType}/>

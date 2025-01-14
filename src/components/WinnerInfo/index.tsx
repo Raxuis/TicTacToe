@@ -1,28 +1,22 @@
 import Button from "../Button";
-import {cn} from "../libs/cn.ts";
+import {cn} from "../../libs/cn.ts";
 import {useNavigate} from "react-router";
-import {useLocalStorage} from "../hooks/useLocalStorage.ts";
-import {GameStats, Winner} from "../types";
-import {Dispatch, SetStateAction} from "react";
-
-
-type SetGameStats = Dispatch<SetStateAction<GameStats>>;
-type setShowModal = Dispatch<SetStateAction<boolean>>;
-
-
-type Props = {
-    showModal: boolean,
-    setShowModal: setShowModal,
-    resetBoard: () => void,
-    winner: Winner | null,
-    username: string | null,
-    setGameStats: SetGameStats,
-}
+import {useLocalStorage} from "../../hooks/useLocalStorage.ts";
+import {GameStats} from "../../types";
+import {useContext} from "react";
+import {BoardContext} from "../../contexts/BoardContext.tsx";
 
 type RankingEntry = Record<string, number>;
 
-const WinnerInfo = (
-    {showModal, setShowModal, resetBoard, winner, username, setGameStats}: Props) => {
+const WinnerInfo = () => {
+    const {
+        winner,
+        showModal,
+        setShowModal,
+        setGameStats,
+        resetBoard,
+        username
+    } = useContext(BoardContext);
 
     const navigate = useNavigate();
     const [, setRanking] = useLocalStorage<RankingEntry>("ranking", {});
