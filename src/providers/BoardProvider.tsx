@@ -22,7 +22,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     });
     const [storedBoard, setStoredBoard] = useLocalStorage<BoardPlayer[][]>("board", initialBoard);
 
-    const gameTypeIsSolo = (boardType === "solo" || boardType === "solo-special");
+    const gameTypeIsSolo = (boardType.includes("solo"));
 
     const switchCurrentPlayer = () => {
         const playerTurn = currentPlayer === "X" ? "O" : "X";
@@ -107,10 +107,23 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         setWinner(null);
     }
 
+
     const giveUpGame = () => {
         resetBoard();
         setGameStats({
             ...gameStats,
+            playerTurn: "X",
+            player1Wins: 0,
+            ties: 0,
+            player2Wins: 0
+        });
+    }
+
+    const deleteCurrentGame = () => {
+        resetBoard();
+        setGameStats({
+            username: "",
+            gameType: "",
             playerTurn: "X",
             player1Wins: 0,
             ties: 0,
@@ -180,7 +193,8 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         setStoredBoard,
         giveUpGame,
         gameTypeIsSolo,
-        switchCurrentPlayer
+        switchCurrentPlayer,
+        deleteCurrentGame
     }
 
     return (
