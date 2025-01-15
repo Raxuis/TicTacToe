@@ -2,15 +2,13 @@ import Button from "../Button";
 import {cn} from "../../libs/cn.ts";
 import {useNavigate} from "react-router";
 import {useLocalStorage} from "../../hooks/useLocalStorage.ts";
-import {BoardPlayer, GameStats} from "../../types";
-import {initialBoard} from "../../constants";
+import {GameStats} from "../../types";
 import {useBoard} from "../../hooks/useBoard.tsx";
 
 type RankingEntry = Record<string, number>;
 
 
 const WinnerInfo = () => {
-    const [, setStoredBoard] = useLocalStorage<BoardPlayer[][]>("board", initialBoard);
     const [, setRanking] = useLocalStorage<RankingEntry>("ranking", {});
 
     const {
@@ -34,6 +32,7 @@ const WinnerInfo = () => {
         if (action === "NEXT" && winner !== null) {
             setGameStats((prevStats: GameStats) => {
                 const updatedStats = {...prevStats};
+                updatedStats.playerTurn = "X";
 
                 if (winner === "X") {
                     updatedStats.player1Wins = (prevStats.player1Wins || 0) + 1;
@@ -52,6 +51,7 @@ const WinnerInfo = () => {
                 player1Wins: 0,
                 ties: 0,
                 player2Wins: 0,
+                playerTurn: "X"
             });
         }
 
