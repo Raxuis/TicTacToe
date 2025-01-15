@@ -21,19 +21,58 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         playerTurn: "X"
     });
     const [storedBoard, setStoredBoard] = useLocalStorage<BoardPlayer[][]>("board", initialBoard);
+    const [moves, setMoves] = useLocalStorage<{ player: Player, position: [number, number] }[]>("moves", []);
+
 
     const gameTypeIsSolo = (gameType: TicTacToesTypes = boardType) => {
         return gameType.includes("solo");
     }
 
+    const gameTypeIsSpecial = (gameType: TicTacToesTypes = boardType) => {
+        return gameType.includes("special");
+    }
+
 
     const switchCurrentPlayer = () => {
-        const playerTurn = currentPlayer === "X" ? "O" : "X";
+        const playerTurn = currentPlayer === "X"
+            ? "O"
+            : "X";
         setCurrentPlayer(playerTurn);
         setGameStats({
             ...gameStats,
             playerTurn: playerTurn
         })
+    }
+
+    const checkPlayerMoves = (moves: { player: Player, position: [number, number] }[]): boolean => {
+        const playerMoves = moves.filter(move => move.player === currentPlayer);
+        return playerMoves.length > 3;
+    }
+
+    const placeMove = (row: number, col: number) => {
+        const newBoard = board.map((rowArray, rowIndex) =>
+            rowArray.map((cell, colIndex) =>
+                rowIndex === row && colIndex === col ? currentPlayer : cell
+            )
+        );
+        if (gameTypeIsSpecial()) {
+            const newMoves = [...moves, {player: currentPlayer, position: [row, col]}];
+
+            if (
+                newMoves.length > 3 && checkPlayerMoves(newMoves)
+            ) {
+                const oldestMove = newMoves.shift();
+                if (oldestMove) {
+                    const [oldRow, oldCol] = oldestMove.position;
+                    newBoard[oldRow][oldCol] = "";
+                }
+            }
+            setMoves(newMoves);
+        }
+        setBoard(newBoard);
+        setStoredBoard(newBoard);
+        checkWinner(newBoard);
+        switchCurrentPlayer();
     }
 
 
@@ -52,16 +91,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
 
         const [row, col] = emptyCells[Math.floor(Math.random() * emptyCells.length)];
 
-        const newBoard = board.map((rowArray, rowIndex) =>
-            rowArray.map((cell, colIndex) =>
-                rowIndex === row && colIndex === col ? "O" : cell
-            )
-        );
-
-        setBoard(newBoard);
-        setStoredBoard(newBoard);
-        checkWinner(newBoard);
-        switchCurrentPlayer();
+        placeMove(row, col);
     }
 
 
@@ -108,6 +138,10 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         setStoredBoard(initialBoard);
         setCurrentPlayer("X");
         setWinner(null);
+
+        if (gameTypeIsSpecial()) {
+            setMoves([]);
+        }
     }
 
 
@@ -197,7 +231,8 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         giveUpGame,
         gameTypeIsSolo,
         switchCurrentPlayer,
-        deleteCurrentGame
+        deleteCurrentGame,
+        placeMove
     }
 
     return (
