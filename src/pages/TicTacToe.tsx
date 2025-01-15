@@ -6,6 +6,7 @@ import PlayersInfo from "../components/PlayersInfo";
 import HeaderBoard from "../components/Board/HeaderBoard";
 import {TicTacToesTypes} from "../types";
 import {useBoard} from "../hooks/useBoard.tsx";
+import DeleteCurrentGame from "../components/Board/DeleteCurrentGame";
 
 const TicTacToe = () => {
     const {
@@ -46,6 +47,8 @@ const TicTacToe = () => {
             <PlayersInfo boardType={boardType}/>
 
             <WinnerInfo/>
+
+            <DeleteCurrentGame />
         </div>
     );
 };

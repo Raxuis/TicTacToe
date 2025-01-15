@@ -4,6 +4,7 @@ import {initialBoard} from "../constants";
 
 export type BoardContextType = {
     giveUpGame: () => void;
+    deleteCurrentGame: () => void;
     resetBoard: () => void;
     board: BoardPlayer[][];
     setBoard: Dispatch<SetStateAction<BoardPlayer[][]>>;
@@ -29,6 +30,8 @@ export type BoardContextType = {
 
 export const BoardContext = createContext<BoardContextType>({
     giveUpGame: () => {
+    },
+    deleteCurrentGame: () => {
     },
     resetBoard: () => {
     },
