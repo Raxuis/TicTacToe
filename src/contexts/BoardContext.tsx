@@ -59,7 +59,8 @@ export const BoardContext = createContext<BoardContextType>({
         boardType: "",
         player1Wins: 0,
         ties: 0,
-        player2Wins: 0
+        player2Wins: 0,
+        playerTurn: "X"
     },
     setGameStats: () => {
     },

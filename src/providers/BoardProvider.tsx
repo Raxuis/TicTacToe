@@ -17,14 +17,20 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         boardType: "",
         player1Wins: 0,
         ties: 0,
-        player2Wins: 0
+        player2Wins: 0,
+        playerTurn: "X"
     });
     const [storedBoard, setStoredBoard] = useLocalStorage<BoardPlayer[][]>("board", initialBoard);
 
     const gameTypeIsSolo = (boardType === "solo" || boardType === "solo-special");
 
     const switchCurrentPlayer = () => {
-        setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
+        const playerTurn = currentPlayer === "X" ? "O" : "X";
+        setCurrentPlayer(playerTurn);
+        setGameStats({
+            ...gameStats,
+            playerTurn: playerTurn
+        })
     }
 
 
@@ -105,6 +111,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         resetBoard();
         setGameStats({
             ...gameStats,
+            playerTurn: "X",
             player1Wins: 0,
             ties: 0,
             player2Wins: 0
@@ -133,10 +140,22 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
             setGameStats({
                 ...gameStats,
                 boardType,
-                username
+                username,
+                playerTurn:
+                    gameStats.playerTurn
+                        ? gameStats.playerTurn
+                        : "X"
             })
         }
     }, [username, boardType]);
+
+    useEffect(() => {
+        if (gameStats.playerTurn) {
+            setCurrentPlayer(gameStats.playerTurn);
+        } else {
+            setCurrentPlayer("X");
+        }
+    }, [gameStats.playerTurn]);
 
 
     const contextValue = {

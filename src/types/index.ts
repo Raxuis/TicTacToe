@@ -21,5 +21,6 @@ export type GameStats = {
     boardType: TicTacToesTypes
     player1Wins: number,
     ties: number,
-    player2Wins: number
+    player2Wins: number,
+    playerTurn: Player
 }
