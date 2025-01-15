@@ -21,7 +21,6 @@ const WinnerInfo = () => {
         setGameStats,
         resetBoard,
         gameTypeIsSolo,
-        boardType
     } = useBoard();
 
     const handleClick = (action: "NEXT" | "QUIT") => {
