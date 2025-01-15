@@ -11,7 +11,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     const [username, setUsername] = useState("");
     const [winner, setWinner] = useState<Winner | null>(null);
     const [showModal, setShowModal] = useState<boolean>(false);
-    const [boardType, setBoardType] = useState<TicTacToesTypes>("")
+    const [boardType, setBoardType] = useState<TicTacToesTypes>("");
     const [gameStats, setGameStats] = useLocalStorage<GameStats>("gameStats", {
         username: "",
         boardType: "",
@@ -22,7 +22,10 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     });
     const [storedBoard, setStoredBoard] = useLocalStorage<BoardPlayer[][]>("board", initialBoard);
 
-    const gameTypeIsSolo = (boardType.includes("solo"));
+    const gameTypeIsSolo = (gameType: TicTacToesTypes = boardType) => {
+        return gameType.includes("solo");
+    }
+
 
     const switchCurrentPlayer = () => {
         const playerTurn = currentPlayer === "X" ? "O" : "X";
@@ -141,12 +144,12 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     }, []);
 
     useEffect(() => {
-        if ((gameTypeIsSolo && currentPlayer === "O") && !winner) {
+        if ((gameTypeIsSolo() && currentPlayer === "O") && !winner) {
             const timer = setTimeout(playBot, 500);
             return () => clearTimeout(timer);
         }
 
-    }, [board, currentPlayer]);
+    }, [currentPlayer]);
 
     useEffect(() => {
         if (boardType !== "" && username !== "") {

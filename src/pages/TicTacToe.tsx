@@ -27,7 +27,7 @@ const TicTacToe = () => {
         if (
             (
                 !username &&
-                gameTypeIsSolo
+                gameTypeIsSolo(boardType)
             ) || !boardType
         ) {
             navigate("/");

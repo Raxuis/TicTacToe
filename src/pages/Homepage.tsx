@@ -19,9 +19,14 @@ const Homepage = () => {
     const handleSubmit = (e: FormEvent<HTMLFormElement>, action: "RESUME" | "START") => {
         e.preventDefault()
 
+
         if (action === "START") {
-            if (gameTypeIsSolo && !username || username === "") {
+            if (gameTypeIsSolo(type.value) && !username || username === "") {
                 setError("Username is required");
+                return;
+            }
+            if (!type.value) {
+                setError("Tic Tac Toe type is required");
                 return;
             }
             navigate(`/tic-tac-toe`, {
@@ -40,9 +45,9 @@ const Homepage = () => {
             <p className="text-xl">Homepage</p>
             {
                 (
-                    (!gameTypeIsSolo && gameStats.boardType)
+                    (!gameTypeIsSolo(type.value) && gameStats.boardType)
                     ||
-                    (gameTypeIsSolo && gameStats.boardType && gameStats.username)
+                    (gameTypeIsSolo(type.value) && gameStats.boardType && gameStats.username)
                 ) ? (
                     <form
                         onSubmit={(e) => handleSubmit(e, "RESUME")}

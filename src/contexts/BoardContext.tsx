@@ -24,7 +24,7 @@ export type BoardContextType = {
     setGameStats: Dispatch<SetStateAction<GameStats>>;
     storedBoard: BoardPlayer[][];
     setStoredBoard: Dispatch<SetStateAction<BoardPlayer[][]>>,
-    gameTypeIsSolo: boolean;
+    gameTypeIsSolo: (gameType: TicTacToesTypes) => boolean;
     switchCurrentPlayer: () => void;
 }
 
@@ -70,7 +70,8 @@ export const BoardContext = createContext<BoardContextType>({
     storedBoard: initialBoard,
     setStoredBoard: () => {
     },
-    gameTypeIsSolo: false,
+    gameTypeIsSolo: () => {
+    },
     switchCurrentPlayer: () => {
     }
 });
