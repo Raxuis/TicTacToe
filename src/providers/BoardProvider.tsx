@@ -17,9 +17,21 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         boardType: "",
         player1Wins: 0,
         ties: 0,
-        player2Wins: 0
+        player2Wins: 0,
+        playerTurn: "X"
     });
     const [storedBoard, setStoredBoard] = useLocalStorage<BoardPlayer[][]>("board", initialBoard);
+
+    const gameTypeIsSolo = (boardType === "solo" || boardType === "solo-special");
+
+    const switchCurrentPlayer = () => {
+        const playerTurn = currentPlayer === "X" ? "O" : "X";
+        setCurrentPlayer(playerTurn);
+        setGameStats({
+            ...gameStats,
+            playerTurn: playerTurn
+        })
+    }
 
 
     const playBot = () => {
@@ -46,7 +58,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         setBoard(newBoard);
         setStoredBoard(newBoard);
         checkWinner(newBoard);
-        setCurrentPlayer("X");
+        switchCurrentPlayer();
     }
 
 
@@ -99,6 +111,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         resetBoard();
         setGameStats({
             ...gameStats,
+            playerTurn: "X",
             player1Wins: 0,
             ties: 0,
             player2Wins: 0
@@ -115,7 +128,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     }, []);
 
     useEffect(() => {
-        if (currentPlayer === "O" && !winner) {
+        if ((gameTypeIsSolo && currentPlayer === "O") && !winner) {
             const timer = setTimeout(playBot, 500);
             return () => clearTimeout(timer);
         }
@@ -127,10 +140,22 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
             setGameStats({
                 ...gameStats,
                 boardType,
-                username
+                username,
+                playerTurn:
+                    gameStats.playerTurn
+                        ? gameStats.playerTurn
+                        : "X"
             })
         }
     }, [username, boardType]);
+
+    useEffect(() => {
+        if (gameStats.playerTurn) {
+            setCurrentPlayer(gameStats.playerTurn);
+        } else {
+            setCurrentPlayer("X");
+        }
+    }, [gameStats.playerTurn]);
 
 
     const contextValue = {
@@ -153,7 +178,9 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         setGameStats,
         storedBoard,
         setStoredBoard,
-        giveUpGame
+        giveUpGame,
+        gameTypeIsSolo,
+        switchCurrentPlayer
     }
 
     return (

@@ -1,7 +1,6 @@
 import Cell from "./Cell";
-import {useContext} from "react";
-import {BoardContext} from "../../contexts/BoardContext.tsx";
 import {BoardPlayer} from "../../types";
+import {useBoard} from "../../hooks/useBoard.tsx";
 
 const Board = () => {
     const {
@@ -9,14 +8,19 @@ const Board = () => {
         currentPlayer,
         winner,
         setBoard,
+        setStoredBoard,
         checkWinner,
-        setCurrentPlayer
-    } = useContext(BoardContext);
+        switchCurrentPlayer,
+        gameTypeIsSolo
+    } = useBoard();
 
     const handleClick = (
         row: number, col: number) => {
 
-        if (board[row][col] !== "" || currentPlayer === "O" || winner) return;
+        if (
+            board[row][col] !== "" ||
+            (gameTypeIsSolo && currentPlayer === "O")
+            || winner) return;
 
         const newBoard = board.map(
             (rowArray: BoardPlayer[], rowIndex: number) =>
@@ -27,8 +31,9 @@ const Board = () => {
         )
 
         setBoard(newBoard);
+        setStoredBoard(newBoard);
         checkWinner(newBoard);
-        setCurrentPlayer("O");
+        switchCurrentPlayer();
     }
 
     return (

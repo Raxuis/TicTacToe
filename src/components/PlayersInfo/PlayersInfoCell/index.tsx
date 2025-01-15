@@ -1,23 +1,25 @@
-import {PlayersInfoCellTypes, TicTacToesTypes} from "../../../types";
+import {PlayersInfoCellTypes} from "../../../types";
 import {cn} from "../../../libs/cn.ts";
+import {useBoard} from "../../../hooks/useBoard.tsx";
 
 type PlayersInfoCellProps = {
     data: number,
     type: PlayersInfoCellTypes,
-    boardType?: TicTacToesTypes,
 }
 
-const PlayersInfoCell = ({data, type, boardType}: PlayersInfoCellProps) => {
+const PlayersInfoCell = ({data, type}: PlayersInfoCellProps) => {
+    const {gameTypeIsSolo} = useBoard();
+
     let textToShow: string = type === "Player1Wins"
         ? "X"
         : type === "Ties"
             ? "Ties"
             : "O";
 
-    if (boardType === "solo" && type === "Player1Wins") {
+    if (gameTypeIsSolo && type === "Player1Wins") {
         textToShow += '(You)';
     }
-    if (boardType === "solo" && type === "Player2Wins") {
+    if (gameTypeIsSolo && type === "Player2Wins") {
         textToShow += '(CPU)';
     }
 

@@ -1,9 +1,9 @@
-import {FormEvent, useContext, useState} from "react";
+import {FormEvent, useState} from "react";
 import {ticTacToes} from "../constants";
 import Button from "../components/Button";
 import {useNavigate} from "react-router";
 import {TicTacToe} from "../types";
-import {BoardContext} from "../contexts/BoardContext.tsx";
+import {useBoard} from "../hooks/useBoard.tsx";
 
 const Homepage = () => {
     const [type, setType] = useState<TicTacToe>({
@@ -14,15 +14,13 @@ const Homepage = () => {
     const navigate = useNavigate();
     const [error, setError] = useState<string>();
 
-    const {
-        gameStats
-    } = useContext(BoardContext);
+    const {gameStats, gameTypeIsSolo} = useBoard();
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>, action: "RESUME" | "START") => {
         e.preventDefault()
 
         if (action === "START") {
-            if ((type.value === "solo" || type.value === "solo-special") && !username || username === "") {
+            if (gameTypeIsSolo && !username || username === "") {
                 setError("Username is required");
                 return;
             }
@@ -41,7 +39,11 @@ const Homepage = () => {
         <div className="w-full bg-white rounded-2xl flex flex-col gap-5 p-5 mt-10">
             <p className="text-xl">Homepage</p>
             {
-                (gameStats.boardType && gameStats.username) ? (
+                (
+                    (!gameTypeIsSolo && gameStats.boardType)
+                    ||
+                    (gameTypeIsSolo && gameStats.boardType && gameStats.username)
+                ) ? (
                     <form
                         onSubmit={(e) => handleSubmit(e, "RESUME")}
                         className="flex flex-col max-w-sm w-full space-y-2 mx-auto">

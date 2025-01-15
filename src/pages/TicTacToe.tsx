@@ -1,27 +1,34 @@
-import {useContext, useEffect} from "react";
+import {useEffect} from "react";
 import WinnerInfo from "../components/WinnerInfo";
 import {useLocation, useNavigate} from "react-router";
 import Board from "../components/Board";
 import PlayersInfo from "../components/PlayersInfo";
 import HeaderBoard from "../components/Board/HeaderBoard";
-import {BoardContext} from "../contexts/BoardContext.tsx";
+import {TicTacToesTypes} from "../types";
+import {useBoard} from "../hooks/useBoard.tsx";
 
-const SoloTicTacToe = () => {
+const TicTacToe = () => {
     const {
         setUsername,
         boardType,
         setBoardType,
-    } = useContext(BoardContext);
+        gameTypeIsSolo
+    } = useBoard();
 
     const navigate = useNavigate();
 
     const location = useLocation();
 
     useEffect(() => {
-        const username = location.state?.username;
-        const boardType = location.state?.boardType;
+        const username: string = location.state?.username;
+        const boardType: TicTacToesTypes = location.state?.boardType;
 
-        if (!username || !boardType) {
+        if (
+            (
+                !username &&
+                gameTypeIsSolo
+            ) || !boardType
+        ) {
             navigate("/");
         } else {
             setUsername(username);
@@ -43,4 +50,4 @@ const SoloTicTacToe = () => {
     );
 };
 
-export default SoloTicTacToe;
+export default TicTacToe;
