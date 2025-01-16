@@ -17,7 +17,8 @@ const Cell = ({
 }) => {
     const {moves, currentPlayer} = useBoard();
 
-    const playerMoves = moves.filter(move => move.player === currentPlayer);
+    const playerMoves = moves.filter(
+        move => move.player === currentPlayer);
 
     const willDisappear = playerMoves.length === 3 &&
         playerMoves[0].position[0] === row &&
