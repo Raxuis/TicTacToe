@@ -1,5 +1,5 @@
 import Cell from "./Cell";
-import {useBoard} from "../../hooks/useBoard.tsx";
+import {useBoard} from "@/hooks/useBoard.tsx";
 
 const Board = () => {
     const {

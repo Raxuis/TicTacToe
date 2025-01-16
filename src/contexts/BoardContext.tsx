@@ -1,6 +1,6 @@
 import {createContext, SetStateAction, Dispatch} from "react";
-import {BoardPlayer, GameStats, Player, TicTacToesTypes, Winner} from "../types";
-import {initialBoard} from "../constants";
+import {BoardPlayer, GameStats, Player, TicTacToesTypes, Winner} from "@/types";
+import {initialBoard} from "@/constants";
 
 export type BoardContextType = {
     giveUpGame: () => void;
@@ -24,7 +24,7 @@ export type BoardContextType = {
     setGameStats: Dispatch<SetStateAction<GameStats>>;
     storedBoard: BoardPlayer[][];
     setStoredBoard: Dispatch<SetStateAction<BoardPlayer[][]>>,
-    gameTypeIsSolo: (gameType: TicTacToesTypes) => boolean;
+    gameTypeIsSolo: (gameType?: TicTacToesTypes) => boolean;
     switchCurrentPlayer: () => void;
     placeMove: (col: number, row: number) => void;
 }
@@ -71,8 +71,7 @@ export const BoardContext = createContext<BoardContextType>({
     storedBoard: initialBoard,
     setStoredBoard: () => {
     },
-    gameTypeIsSolo: () => {
-    },
+    gameTypeIsSolo: () => false,
     switchCurrentPlayer: () => {
     },
     placeMove: () => {

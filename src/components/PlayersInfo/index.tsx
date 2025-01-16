@@ -1,8 +1,7 @@
-import {TicTacToesTypes} from "../../types";
 import PlayersInfoCell from "./PlayersInfoCell";
-import {useBoard} from "../../hooks/useBoard.tsx";
+import {useBoard} from "@/hooks/useBoard.tsx";
 
-const PlayersInfo = ({boardType}: { boardType: TicTacToesTypes }) => {
+const PlayersInfo = () => {
     const {gameStats} = useBoard();
 
     const {
@@ -13,9 +12,9 @@ const PlayersInfo = ({boardType}: { boardType: TicTacToesTypes }) => {
 
     return (
         <div className="grid grid-cols-3 gap-4 pt-6">
-            <PlayersInfoCell data={player1Wins} type="Player1Wins" boardType={boardType}/>
+            <PlayersInfoCell data={player1Wins} type="Player1Wins"/>
             <PlayersInfoCell data={ties} type="Ties"/>
-            <PlayersInfoCell data={player2Wins} type="Player2Wins" boardType={boardType}/>
+            <PlayersInfoCell data={player2Wins} type="Player2Wins"/>
         </div>
     );
 };

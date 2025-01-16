@@ -1,8 +1,8 @@
 import {ReactNode, useEffect, useState} from "react";
-import {BoardContext} from "../contexts/BoardContext.tsx";
-import {BoardPlayer, GameStats, Player, TicTacToesTypes, Winner} from "../types";
-import {initialBoard} from "../constants";
-import {useLocalStorage} from "../hooks/useLocalStorage.ts";
+import {BoardContext} from "@/contexts/BoardContext.tsx";
+import {BoardPlayer, GameStats, Player, TicTacToesTypes, Winner} from "@/types";
+import {initialBoard} from "@/constants";
+import {useLocalStorage} from "@/hooks/useLocalStorage.ts";
 
 
 export const BoardProvider = ({children}: { children: ReactNode }) => {
@@ -21,7 +21,10 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         playerTurn: "X"
     });
     const [storedBoard, setStoredBoard] = useLocalStorage<BoardPlayer[][]>("board", initialBoard);
-    const [moves, setMoves] = useLocalStorage<{ player: Player, position: [number, number] }[]>("moves", []);
+    const [moves, setMoves] = useLocalStorage<Array<{
+        player: Player,
+        position: [number, number]
+    }>>("moves", []);
 
 
     const gameTypeIsSolo = (gameType: TicTacToesTypes = boardType) => {
@@ -56,7 +59,10 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
             )
         );
         if (gameTypeIsSpecial()) {
-            const newMoves = [...moves, {player: currentPlayer, position: [row, col]}];
+            const newMoves = [...moves, {
+                player: currentPlayer,
+                position: [row, col] as [number, number]
+            }];
 
             if (
                 newMoves.length > 3 && checkPlayerMoves(newMoves)
@@ -160,7 +166,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         resetBoard();
         setGameStats({
             username: "",
-            gameType: "",
+            boardType: "",
             playerTurn: "X",
             player1Wins: 0,
             ties: 0,

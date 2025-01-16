@@ -1,6 +1,6 @@
-import cross from "../../../assets/cross.svg";
-import circle from "../../../assets/circle.svg";
-import {BoardPlayer} from "../../../types";
+import cross from "@/assets/cross.svg";
+import circle from "@/assets/circle.svg";
+import {BoardPlayer} from "@/types";
 
 const Cell = (
     {cellValue, onClick}: { cellValue: BoardPlayer, onClick: () => void }) => {

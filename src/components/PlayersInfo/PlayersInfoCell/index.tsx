@@ -1,6 +1,6 @@
-import {PlayersInfoCellTypes} from "../../../types";
-import {cn} from "../../../libs/cn.ts";
-import {useBoard} from "../../../hooks/useBoard.tsx";
+import {PlayersInfoCellTypes} from "@/types";
+import {cn} from "@/libs/cn.ts";
+import {useBoard} from "@/hooks/useBoard.tsx";
 import {useMemo} from "react";
 
 type PlayersInfoCellProps = {
