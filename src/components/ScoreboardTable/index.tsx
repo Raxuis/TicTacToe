@@ -14,7 +14,7 @@ const ScoreboardTable = ({scoreboard}: {
     }
 
     return (
-        <table className="table table-md text-primary font-light cursor-default">
+        <table className="table table-md text-primary font-light cursor-default max-sm:mx-5">
             <thead>
             <tr className="text-primary text-lg text-center">
                 <th></th>

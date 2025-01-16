@@ -18,7 +18,7 @@ export function Footer() {
     return (
         <footer className="px-5 lg:px-10 p-5 max-w-7xl mx-auto fixed bottom-0 w-screen">
             <div
-                className="flex flex-col gap-y-5 md:flex-row items-start md:items-center justify-between w-full gap-x-5">
+                className="flex gap-y-5 items-start md:items-center justify-between w-full gap-x-5">
                 <div className="flex items-center gap-x-2">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="size-8">
                         <defs>
@@ -54,7 +54,7 @@ export function Footer() {
                 </div>
             </div>
             <div
-                className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
+                className="mt-5 sm:mt-12 pt-4 sm:pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
                 <p className="text-white">© {new Date().getFullYear()} Tic-Tac-Toe. All rights reserved.</p>
             </div>
         </footer>
