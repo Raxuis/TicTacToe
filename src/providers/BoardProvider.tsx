@@ -6,7 +6,7 @@ import {useLocalStorage} from "@/hooks/useLocalStorage.ts";
 
 
 export const BoardProvider = ({children}: { children: ReactNode }) => {
-    const [board, setBoard] = useState<BoardPlayer[][]>(initialBoard);
+    const [board, setBoard] = useLocalStorage<BoardPlayer[][]>("board", initialBoard);
     const [currentPlayer, setCurrentPlayer] = useState<Player>("X");
     const [username, setUsername] = useState("");
     const [winner, setWinner] = useState<Winner | null>(null);
@@ -20,7 +20,6 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         player2Wins: 0,
         playerTurn: "X"
     });
-    const [storedBoard, setStoredBoard] = useLocalStorage<BoardPlayer[][]>("board", initialBoard);
     const [moves, setMoves] = useLocalStorage<Array<{
         player: Player,
         position: [number, number]
@@ -76,7 +75,6 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
             setMoves(newMoves);
         }
         setBoard(newBoard);
-        setStoredBoard(newBoard);
         checkWinner(newBoard);
         switchCurrentPlayer();
     }
@@ -120,14 +118,14 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
             if (row.every(cell => cell === "X")) {
                 setWinner("X");
                 setShowModal(true);
-                setStoredBoard(initialBoard);
+                setBoard(initialBoard);
                 return
             }
 
             if (row.every(cell => cell === "O")) {
                 setWinner("O");
                 setShowModal(true);
-                setStoredBoard(initialBoard);
+                setBoard(initialBoard);
                 return
             }
         }
@@ -135,13 +133,12 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         if (tabToCheck.flat().every((cell) => cell !== "")) {
             setWinner("Draw");
             setShowModal(true);
-            setStoredBoard(initialBoard);
+            setBoard(initialBoard);
         }
     }
 
     const resetBoard = () => {
         setBoard(initialBoard);
-        setStoredBoard(initialBoard);
         setCurrentPlayer("X");
         setWinner(null);
 
@@ -173,15 +170,6 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
             player2Wins: 0
         });
     }
-
-    useEffect(() => {
-        if (storedBoard) {
-            setBoard(storedBoard);
-            checkWinner(storedBoard);
-        } else {
-            setStoredBoard(initialBoard);
-        }
-    }, []);
 
     useEffect(() => {
         if ((gameTypeIsSolo() && currentPlayer === "O") && !winner) {
@@ -232,8 +220,6 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         setBoardType,
         gameStats,
         setGameStats,
-        storedBoard,
-        setStoredBoard,
         giveUpGame,
         gameTypeIsSolo,
         switchCurrentPlayer,
