@@ -54,8 +54,8 @@ export function Footer() {
                 </div>
             </div>
             <div
-                className="mt-5 sm:mt-12 pt-4 sm:pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
-                <p className="text-white">© {new Date().getFullYear()} Tic-Tac-Toe. All rights reserved.</p>
+                className="mt-5 sm:mt-12 pt-4 sm:pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center text-sm text-black dark:text-white">
+                <p>© {new Date().getFullYear()} Tic-Tac-Toe. All rights reserved.</p>
             </div>
         </footer>
     );

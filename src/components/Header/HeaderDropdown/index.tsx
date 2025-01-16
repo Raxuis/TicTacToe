@@ -40,12 +40,12 @@ const HeaderDropdown = ({open, setOpen, headerLinks}: HeaderDropdownProps) => {
             open={open}
             onToggle={(e) => setOpen((e.target as HTMLDetailsElement).open)}
         >
-            <summary className="btn btn-sm m-1 focus:ring-4">
+            <summary className="btn btn-sm m-1 focus:ring-2 dark:bg-white hover:dark:bg-opacity-5">
                 <MenuIcon/>
             </summary>
             <ul
                 className={cn(
-                    "menu dropdown-content bg-base-100 rounded-box z-[1] mt-4 w-32 p-2 shadow text-black"
+                    "menu dropdown-content bg-base-100 rounded-box z-[1] mt-4 w-32 p-2 shadow text-gray-dark dark:text-white"
                 )}
             >
                 {headerLinks.map((link, index) =>

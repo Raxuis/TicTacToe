@@ -8,9 +8,9 @@ const ThemeToggle = () => {
     return (
             <button onClick={toggleTheme}>
                 {theme === 'dark' ? (
-                    <Sun className="size-6 text-blue-700 dark:text-white"/>
+                    <Sun className="size-6 text-black dark:text-primary"/>
                 ) : (
-                    <Moon className="size-6 text-blue-700 dark:text-white"/>
+                    <Moon className="size-6 text-black dark:text-primary"/>
                 )}
             </button>
     );

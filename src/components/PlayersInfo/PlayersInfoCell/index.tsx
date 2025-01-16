@@ -32,7 +32,7 @@ const PlayersInfoCell = ({data, type}: PlayersInfoCellProps) => {
 
     return (
         <div className={
-            cn('h-20 w-24 flex flex-col items-center justify-center text-xl font-bold p-4 rounded-lg',
+            cn('h-20 w-24 flex flex-col items-center justify-center text-xl font-bold p-4 rounded-lg text-gray-dark',
                 type === "Player1Wins" ? 'bg-gray-light-dark' : type === "Ties" ? 'bg-gray-light' : 'bg-secondary')
         }>
                 <span className="uppercase">

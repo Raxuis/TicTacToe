@@ -21,7 +21,7 @@ const Header = () => {
     return (
         <header>
             <nav
-                className="navbar rounded-box flex items-center justify-between text-white w-screen max-w-7xl mx-auto px-5 lg:px-10">
+                className="navbar rounded-box flex items-center justify-between text-blue-700 dark:text-white w-screen max-w-7xl mx-auto px-5 lg:px-10">
                 <div className="flex-1 px-2 lg:flex-none">
                     <Link className="text-lg font-bold" to="/">
                         Tic-Tac-Toe
