@@ -4,13 +4,16 @@ import './index.css'
 import App from './App.tsx'
 import {BrowserRouter} from "react-router";
 import {BoardProvider} from "./providers/BoardProvider.tsx";
+import {ThemeProvider} from "@/providers/ThemeProvider.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <BoardProvider>
+        <ThemeProvider>
+            <BoardProvider>
                 <BrowserRouter>
                     <App/>
                 </BrowserRouter>
-        </BoardProvider>
-    </StrictMode>,
+            </BoardProvider>
+        </ThemeProvider>
+    </StrictMode>
 )

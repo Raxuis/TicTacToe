@@ -4,7 +4,7 @@ import {Footer} from "@/components/Footer";
 
 const Layout = ({children}: { children: ReactNode }) => {
     return (
-        <div className="bg-gray-dark min-h-screen min-w-screen font-space-grotesk py-5">
+        <div className="bg-white dark:bg-gray-dark  min-h-screen min-w-screen font-space-grotesk py-5">
             <Header/>
             <div className="max-w-5xl mx-auto">
                 {children}
