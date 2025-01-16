@@ -1,12 +1,16 @@
 import {ReactNode} from "react";
 import Header from "../components/Header";
+import {Footer} from "../components/Footer";
 
 const Layout = ({children}: { children: ReactNode }) => {
     return (
-        <div className="bg-gray-dark min-h-screen min-w-screen">
-            <div className="w-screen max-w-5xl mx-auto py-5 font-space-grotesk">
-                <Header/>
+        <div className="bg-gray-dark min-h-screen min-w-screen font-space-grotesk py-5">
+            <Header/>
+            <div className="max-w-5xl mx-auto">
                 {children}
+            </div>
+            <div className="flex flex-col justify-center items-center">
+                <Footer/>
             </div>
         </div>
     );
