@@ -1,45 +1,53 @@
 import {useNavigate} from "react-router";
 import {useLocalStorage} from "@/hooks/useLocalStorage.ts";
-import {GameStats} from "@/types";
+import {GameStats, ScoreboardType} from "@/types";
 import {useBoard} from "@/hooks/useBoard.tsx";
 import ButtonClickEffect from "../ButtonClickEffect";
 import cross from "@/assets/cross.svg";
 import circle from "@/assets/circle.svg";
 import {cn} from "@/libs/cn.ts";
 
-type RankingEntry = Record<string, number>;
-
 
 const WinnerInfo = () => {
-    const [, setRanking] = useLocalStorage<RankingEntry>("ranking", {});
+    const [, setScoreboard] = useLocalStorage<ScoreboardType[]>("scoreboard", []);
 
     const {
         winner,
         showModal,
         setShowModal,
         username,
+        gameStats,
         setGameStats,
         resetBoard,
         gameTypeIsSolo,
     } = useBoard();
 
+
     const handleClick = (action: "NEXT" | "QUIT") => {
-        if (winner !== "Draw" && winner !== null && winner !== "O" && username && gameTypeIsSolo()) {
-            setRanking(prevRanking => ({
-                ...prevRanking,
-                [username]: (prevRanking[username] || 0) + 1
-            }));
+        if (winner === "O" && username && gameTypeIsSolo()) {
+            setScoreboard(prevScoreBoard => [...prevScoreBoard, {
+                username: username,
+                winStreak: gameStats.player1Wins,
+                timestamp: Date.now()
+            }]);
+
+
+            setGameStats({
+                ...gameStats,
+                player1Wins: 0,
+                ties: 0,
+                player2Wins: 0,
+                playerTurn: "X"
+            })
         }
 
-        if (action === "NEXT" && winner !== null) {
+        if (action === "NEXT" && winner !== null && winner !== "O") {
             setGameStats((prevStats: GameStats) => {
                 const updatedStats = {...prevStats};
                 updatedStats.playerTurn = "X";
 
                 if (winner === "X") {
                     updatedStats.player1Wins = (prevStats.player1Wins || 0) + 1;
-                } else if (winner === "O") {
-                    updatedStats.player2Wins = (prevStats.player2Wins || 0) + 1;
                 } else if (winner === "Draw") {
                     updatedStats.ties = (prevStats.ties || 0) + 1;
                 }
@@ -47,6 +55,12 @@ const WinnerInfo = () => {
                 return updatedStats;
             });
         } else if (action === "QUIT") {
+            setScoreboard(prevScoreBoard => [...prevScoreBoard, {
+                username: username,
+                winStreak: gameStats.player1Wins,
+                timestamp: Date.now()
+            }]);
+
             setGameStats({
                 username: "",
                 boardType: "",

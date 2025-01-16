@@ -24,3 +24,9 @@ export type GameStats = {
     player2Wins: number,
     playerTurn: Player
 }
+
+export type ScoreboardType = {
+    username: string,
+    winStreak: number,
+    timestamp: number
+}
