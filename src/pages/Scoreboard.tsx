@@ -1,6 +1,6 @@
 import {useLocalStorage} from "@/hooks/useLocalStorage.ts";
 import {ScoreboardType, ScoreboardTypeWithRank} from "@/types";
-import {ticTacToes} from "@/constants";
+import ScoreboardTable from "@/components/ScoreboardTable";
 
 const Scoreboard = () => {
     const [scoreboard,] = useLocalStorage<ScoreboardType[]>("scoreboard", []);
@@ -27,36 +27,10 @@ const Scoreboard = () => {
     const sortedScoreboardByTimestamp = scoreboardWithRank.sort((
         a: ScoreboardTypeWithRank, b: ScoreboardTypeWithRank) => b.timestamp - a.timestamp)
 
-    const getCorrespondingBoardType = (boardType: string) => {
-        return ticTacToes.find(ticTacToe => ticTacToe.value === boardType)?.title;
-    }
 
     return (
         <div className="overflow-x-auto">
-            <table className="table table-md text-primary font-light cursor-default">
-                <thead>
-                    <tr className="text-primary text-lg text-center">
-                        <th></th>
-                        <th>Username</th>
-                        <th>Win Streak</th>
-                        <th>Time</th>
-                        <th>Board Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {
-                    sortedScoreboardByTimestamp.map((score, idx) => (
-                        <tr key={idx} className="hover text-center">
-                            <td>{score.rank}</td>
-                            <td>{score.username}</td>
-                            <td>{score.winStreak}</td>
-                            <td>{new Date(score.timestamp).toLocaleString()}</td>
-                            <td>{getCorrespondingBoardType(score.boardType)}</td>
-                        </tr>
-                    ))
-                }
-                </tbody>
-            </table>
+            <ScoreboardTable scoreboard={sortedScoreboardByTimestamp}/>
         </div>
     );
 };
