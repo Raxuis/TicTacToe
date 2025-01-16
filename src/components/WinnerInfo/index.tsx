@@ -1,11 +1,11 @@
 import {useNavigate} from "react-router";
-import {useLocalStorage} from "../../hooks/useLocalStorage.ts";
-import {GameStats} from "../../types";
-import {useBoard} from "../../hooks/useBoard.tsx";
+import {useLocalStorage} from "@/hooks/useLocalStorage.ts";
+import {GameStats} from "@/types";
+import {useBoard} from "@/hooks/useBoard.tsx";
 import ButtonClickEffect from "../ButtonClickEffect";
-import cross from "../../assets/cross.svg";
-import circle from "../../assets/circle.svg";
-import {cn} from "../../libs/cn.ts";
+import cross from "@/assets/cross.svg";
+import circle from "@/assets/circle.svg";
+import {cn} from "@/libs/cn.ts";
 
 type RankingEntry = Record<string, number>;
 
@@ -24,7 +24,7 @@ const WinnerInfo = () => {
     } = useBoard();
 
     const handleClick = (action: "NEXT" | "QUIT") => {
-        if (winner !== "Draw" && winner !== null && winner !== "O" && username && gameTypeIsSolo) {
+        if (winner !== "Draw" && winner !== null && winner !== "O" && username && gameTypeIsSolo()) {
             setRanking(prevRanking => ({
                 ...prevRanking,
                 [username]: (prevRanking[username] || 0) + 1
@@ -76,13 +76,13 @@ const WinnerInfo = () => {
                 <div className="modal-box bg-gray-medium">
                     <div className="flex flex-col items-center text-xl uppercase font-bold">
                         {winner === "Draw" ? (
-                            <h3>
+                            <h3 className="text-gray-light">
                                 Ahhh, that's a draw...
                             </h3>
                         ) : (
                             <h3 className={textColor}>
                                 {
-                                    gameTypeIsSolo
+                                    gameTypeIsSolo()
                                         ? winner === "O" ? "CPU " : "You "
                                         : winner + " "
                                 }
@@ -90,12 +90,17 @@ const WinnerInfo = () => {
                             </h3>
                         )}
                     </div>
-                    <div className={cn('py-4 block uppercase text-4xl font-bold', textColor)}>
-                        <div className="flex justify-center items-center gap-6">
-                            <img src={winner === "O" ? circle : cross} alt="cross" className="size-20 object-cover"/>
-                            <p>Takes the round</p>
-                        </div>
-                    </div>
+                    {
+                        winner !== "Draw" && (
+                            <div className={cn('py-4 block uppercase text-4xl font-bold', textColor)}>
+                                <div className="flex justify-center items-center gap-6">
+                                    <img src={winner === "O" ? circle : cross} alt="cross"
+                                         className="size-20 object-cover"/>
+                                    <p>Takes the round</p>
+                                </div>
+                            </div>
+                        )
+                    }
                     <div className="flex justify-center gap-4 pt-2">
                         <ButtonClickEffect className="bg-primary text-medium-gray cursor-pointer shadow-buttonGreyLight"
                                            onClick={() => {

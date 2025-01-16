@@ -1,5 +1,5 @@
-import ButtonClickEffect from "../../ButtonClickEffect";
-import {useBoard} from "../../../hooks/useBoard.tsx";
+import ButtonClickEffect from "@/components/ButtonClickEffect";
+import {useBoard} from "@/hooks/useBoard.tsx";
 import {useNavigate} from "react-router";
 
 const DeleteCurrentGame = () => {

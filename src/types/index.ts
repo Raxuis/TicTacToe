@@ -1,4 +1,4 @@
-import {ticTacToes} from "../constants";
+import {ticTacToes} from "@/constants";
 
 export type TicTacToe = {
     title: string;

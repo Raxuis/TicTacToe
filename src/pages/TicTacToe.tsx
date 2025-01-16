@@ -1,17 +1,16 @@
 import {useEffect} from "react";
-import WinnerInfo from "../components/WinnerInfo";
+import WinnerInfo from "@/components/WinnerInfo";
 import {useLocation, useNavigate} from "react-router";
-import Board from "../components/Board";
-import PlayersInfo from "../components/PlayersInfo";
-import HeaderBoard from "../components/Board/HeaderBoard";
-import {TicTacToesTypes} from "../types";
-import {useBoard} from "../hooks/useBoard.tsx";
-import DeleteCurrentGame from "../components/Board/DeleteCurrentGame";
+import Board from "@/components/Board";
+import PlayersInfo from "@/components/PlayersInfo";
+import HeaderBoard from "@/components/Board/HeaderBoard";
+import {TicTacToesTypes} from "@/types";
+import {useBoard} from "@/hooks/useBoard.tsx";
+import DeleteCurrentGame from "@/components/Board/DeleteCurrentGame";
 
 const TicTacToe = () => {
     const {
         setUsername,
-        boardType,
         setBoardType,
         gameTypeIsSolo
     } = useBoard();
@@ -44,11 +43,11 @@ const TicTacToe = () => {
 
             <Board/>
 
-            <PlayersInfo boardType={boardType}/>
+            <PlayersInfo/>
 
             <WinnerInfo/>
 
-            <DeleteCurrentGame />
+            <DeleteCurrentGame/>
         </div>
     );
 };

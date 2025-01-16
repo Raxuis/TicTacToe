@@ -1,7 +1,7 @@
 import {Link, useNavigate} from "react-router";
-import {useBoard} from "../../hooks/useBoard.tsx";
+import {useBoard} from "@/hooks/useBoard.tsx";
 import {useState} from "react";
-import {cn} from "../../libs/cn.ts";
+import {cn} from "@/libs/cn.ts";
 import {MenuIcon} from "lucide-react";
 
 type HeaderLinkType = {

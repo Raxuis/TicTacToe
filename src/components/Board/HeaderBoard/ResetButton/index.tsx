@@ -1,6 +1,6 @@
 import {RotateCcw} from "lucide-react";
-import Button from "../../../Button";
-import {useBoard} from "../../../../hooks/useBoard.tsx";
+import Button from "@/components/Button";
+import {useBoard} from "@/hooks/useBoard.tsx";
 
 const ResetButton = () => {
     const {giveUpGame} = useBoard();

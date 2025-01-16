@@ -1,4 +1,4 @@
-import {BoardPlayer, TicTacToe} from "../types";
+import {BoardPlayer, TicTacToe} from "@/types";
 
 export const initialBoard: BoardPlayer[][] = [
     ["", "", ""],

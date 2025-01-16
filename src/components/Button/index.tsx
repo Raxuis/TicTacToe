@@ -1,4 +1,4 @@
-import {cn} from "../../libs/cn.ts";
+import {cn} from "@/libs/cn.ts";
 import {ButtonHTMLAttributes, ReactNode} from "react";
 
 type ButtonProps = {

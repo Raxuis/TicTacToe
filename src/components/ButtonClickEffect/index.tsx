@@ -1,6 +1,6 @@
-import React, {ReactNode} from 'react';
-import Button from "../Button";
-import {cn} from "../../libs/cn.ts";
+import {ReactNode} from 'react';
+import Button from "@/components/Button";
+import {cn} from "@/libs/cn.ts";
 
 type ButtonClickEffectProps = {
     children: ReactNode,
