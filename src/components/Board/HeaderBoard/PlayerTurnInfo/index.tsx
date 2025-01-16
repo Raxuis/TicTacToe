@@ -10,9 +10,9 @@ const PlayerTurnInfo = () => {
             ? "text-primary-dark"
             : "text-primary";
     return (
-        <div className="block">
+        <div className="block shadow-buttonGrey bg-gray-medium rounded-lg">
             <div
-                className="flex gap-4 items-center justify-center bg-gray-medium rounded-lg shadow-2xl shadow-primary/10 p-2 px-4">
+                className="flex gap-4 items-center justify-center p-2 px-4">
                 {
                     currentPlayer === "X" ? (
                         <img src={cross} alt="cross" className="object-cover size-5"/>
