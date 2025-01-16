@@ -27,8 +27,9 @@ const WinnerInfo = () => {
         if (winner === "O" && username && gameTypeIsSolo()) {
             setScoreboard(prevScoreBoard => [...prevScoreBoard, {
                 username: username,
+                boardType: gameStats.boardType,
                 winStreak: gameStats.player1Wins,
-                timestamp: Date.now()
+                timestamp: Date.now(),
             }]);
 
 
@@ -57,6 +58,7 @@ const WinnerInfo = () => {
         } else if (action === "QUIT") {
             setScoreboard(prevScoreBoard => [...prevScoreBoard, {
                 username: username,
+                boardType: gameStats.boardType,
                 winStreak: gameStats.player1Wins,
                 timestamp: Date.now()
             }]);
