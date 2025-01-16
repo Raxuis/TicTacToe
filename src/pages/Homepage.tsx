@@ -30,11 +30,11 @@ const Homepage = () => {
                 setError("Tic Tac Toe type is required");
                 return;
             }
-            navigate(`/tic-tac-toe`, {
+            navigate('/tic-tac-toe', {
                 state: {username, boardType: type.value}
             })
         } else {
-            navigate(`/tic-tac-toe`, {
+            navigate('/tic-tac-toe', {
                 state: {username: gameStats.username, boardType: gameStats.boardType}
             })
         }

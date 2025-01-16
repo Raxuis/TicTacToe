@@ -42,13 +42,19 @@ const WinnerInfo = () => {
             })
         }
 
-        if (action === "NEXT" && winner !== null && winner !== "O") {
+        if ((
+            action === "NEXT" && winner !== null
+        ) && (
+            gameTypeIsSolo() && winner !== "O" || !gameTypeIsSolo()
+        )) {
             setGameStats((prevStats: GameStats) => {
                 const updatedStats = {...prevStats};
                 updatedStats.playerTurn = "X";
 
                 if (winner === "X") {
                     updatedStats.player1Wins = (prevStats.player1Wins || 0) + 1;
+                } else if (winner === "O") {
+                    updatedStats.player2Wins = (prevStats.player2Wins || 0) + 1;
                 } else if (winner === "Draw") {
                     updatedStats.ties = (prevStats.ties || 0) + 1;
                 }
@@ -118,7 +124,7 @@ const WinnerInfo = () => {
                         )
                     }
                     <div className="flex justify-center gap-4 pt-2">
-                        <ButtonClickEffect className="bg-primary text-medium-gray cursor-pointer shadow-buttonGreyLight"
+                        <ButtonClickEffect className="bg-primary text-gray-dark cursor-pointer shadow-buttonGreyLight"
                                            onClick={() => {
                                                handleClick("QUIT");
                                                navigate("/");
@@ -126,7 +132,7 @@ const WinnerInfo = () => {
                             QUIT
                         </ButtonClickEffect>
                         <ButtonClickEffect
-                            className="bg-secondary text-medium-gray cursor-pointer shadow-buttonSecondary"
+                            className="bg-secondary text-gray-dark cursor-pointer shadow-buttonSecondary"
                             onClick={() => handleClick("NEXT")}>
                             NEXT ROUND
                         </ButtonClickEffect>
