@@ -4,7 +4,7 @@ import Button from "@/components/Button";
 import {useNavigate} from "react-router";
 import {TicTacToe} from "@/types";
 import {useBoard} from "@/hooks/useBoard.tsx";
-import {LineShadowText} from "src/components/LineShadowText";
+import {LineShadowText} from "@/components/LineShadowText";
 
 const Homepage = () => {
     const [type, setType] = useState<TicTacToe>({
@@ -53,17 +53,15 @@ const Homepage = () => {
 
     return (
         <>
-            <div className="mt-10">
-                <h1 className="text-primary text-5xl font-semibold leading-none tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl">
-                    Welcome to
-                    <LineShadowText className="italic text-secondary" shadowColor="yellow">
+            <h1 className="text-primary text-5xl font-semibold leading-none tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl">
+                Welcome to
+                <LineShadowText className="italic text-secondary" shadowColor="yellow">
                     TicTacToe
-                    </LineShadowText>
-                    {" "}
-                     !
-                </h1>
-                <p className="text-gray-light/70">Fill the form to start a new game.</p>
-            </div>
+                </LineShadowText>
+                {" "}
+                !
+            </h1>
+            <p className="text-gray-light/70">Fill the form to start a new game.</p>
             <div className="w-full bg-white rounded-2xl flex flex-col gap-5 p-5 mt-5">
                 <p className="text-xl">Homepage</p>
                 {isGameStateValid ? (
