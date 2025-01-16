@@ -36,7 +36,7 @@ export function Footer() {
                             d="M12 2v20m10-10H2m6 6.5a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0M16 3l5 5m0-5l-5 5"
                         />
                     </svg>
-                    <h2 className="font-bold text-white">
+                    <h2 className="font-bold dark:text-white">
                         Tic Tac Toe
                     </h2>
                 </div>
@@ -46,7 +46,7 @@ export function Footer() {
                             key={index}
                             href={icon.url}
                             target="_blank"
-                            className="text-neutral-500 hover:text-white text-xl"
+                            className="text-gray-dark dark:text-white text-xl"
                         >
                             {icon.icon}
                         </a>
@@ -54,7 +54,7 @@ export function Footer() {
                 </div>
             </div>
             <div
-                className="mt-5 sm:mt-12 pt-4 sm:pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center text-sm text-black dark:text-white">
+                className="mt-5 sm:mt-12 pt-4 sm:pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center text-sm text-gray-dark dark:text-white">
                 <p>© {new Date().getFullYear()} Tic-Tac-Toe. All rights reserved.</p>
             </div>
         </footer>

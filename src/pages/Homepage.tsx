@@ -77,7 +77,7 @@ const Homepage = () => {
                         <form onSubmit={(e) => handleSubmit(e, "START")}
                               className="flex flex-col max-w-sm w-full space-y-2 mx-auto">
                             <div className="flex flex-col space-y-2">
-                                <label htmlFor="type">Tic Tac Toe Type</label>
+                                <label htmlFor="type" className="text-gray-dark">Tic Tac Toe Type</label>
                                 <select name="type" id="type"
                                         onChange={e => {
                                             const selectedType = ticTacToes.find(t => t.value === e.target.value);
