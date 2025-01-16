@@ -1,6 +1,7 @@
 import {PlayersInfoCellTypes} from "../../../types";
 import {cn} from "../../../libs/cn.ts";
 import {useBoard} from "../../../hooks/useBoard.tsx";
+import {useMemo} from "react";
 
 type PlayersInfoCellProps = {
     data: number,
@@ -9,19 +10,25 @@ type PlayersInfoCellProps = {
 
 const PlayersInfoCell = ({data, type}: PlayersInfoCellProps) => {
     const {gameTypeIsSolo} = useBoard();
+    const isSoloGame = gameTypeIsSolo();
 
-    let textToShow: string = type === "Player1Wins"
-        ? "X"
-        : type === "Ties"
-            ? "Ties"
-            : "O";
+    const displayText = useMemo(() => {
+        let text = type === "Player1Wins"
+            ? "X"
+            : type === "Ties"
+                ? "Ties"
+                : "O";
 
-    if (gameTypeIsSolo && type === "Player1Wins") {
-        textToShow += '(You)';
-    }
-    if (gameTypeIsSolo && type === "Player2Wins") {
-        textToShow += '(CPU)';
-    }
+        if (isSoloGame) {
+            if (type === "Player1Wins") {
+                text += '(You)';
+            } else if (type === "Player2Wins") {
+                text += '(CPU)';
+            }
+        }
+
+        return text;
+    }, [type, isSoloGame]);
 
     return (
         <div className={
@@ -29,8 +36,7 @@ const PlayersInfoCell = ({data, type}: PlayersInfoCellProps) => {
                 type === "Player1Wins" ? 'bg-gray-light-dark' : type === "Ties" ? 'bg-gray-light' : 'bg-secondary')
         }>
                 <span className="uppercase">
-                    {textToShow}
-
+                    {displayText}
                 </span>
             {data}
         </div>

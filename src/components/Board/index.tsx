@@ -1,5 +1,4 @@
 import Cell from "./Cell";
-import {BoardPlayer} from "../../types";
 import {useBoard} from "../../hooks/useBoard.tsx";
 
 const Board = () => {
@@ -7,10 +6,7 @@ const Board = () => {
         board,
         currentPlayer,
         winner,
-        setBoard,
-        setStoredBoard,
-        checkWinner,
-        switchCurrentPlayer,
+        placeMove,
         gameTypeIsSolo
     } = useBoard();
 
@@ -19,21 +15,10 @@ const Board = () => {
 
         if (
             board[row][col] !== "" ||
-            (gameTypeIsSolo && currentPlayer === "O")
+            (gameTypeIsSolo() && currentPlayer === "O")
             || winner) return;
 
-        const newBoard = board.map(
-            (rowArray: BoardPlayer[], rowIndex: number) =>
-                rowArray.map(
-                    (cell: BoardPlayer, colIndex: number) =>
-                        rowIndex === row && colIndex === col ? currentPlayer : cell
-                )
-        )
-
-        setBoard(newBoard);
-        setStoredBoard(newBoard);
-        checkWinner(newBoard);
-        switchCurrentPlayer();
+        placeMove(row, col);
     }
 
     return (
