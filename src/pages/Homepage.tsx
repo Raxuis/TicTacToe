@@ -62,9 +62,9 @@ const Homepage = () => {
                     {" "}
                     !
                 </h1>
-                <p className="text-gray-light/70">Fill the form to start a new game.</p>
-                <div className="w-full bg-white rounded-2xl flex flex-col gap-5 p-5 mt-5">
-                    <p className="text-xl">Homepage</p>
+                <p className="text-gray-light dark:text-gray-light/70">Fill the form to start a new game.</p>
+                <div className="w-full bg-gray-light/30 dark:bg-white rounded-2xl flex flex-col gap-5 p-5 mt-5">
+                    <p className="text-xl text-gray-dark">Homepage</p>
                     {isGameStateValid ? (
                         <form
                             onSubmit={(e) => handleSubmit(e, "RESUME")}

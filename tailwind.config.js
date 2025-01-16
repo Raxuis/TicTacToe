@@ -4,9 +4,10 @@ export default {
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
     ],
+    darkMode: ['selector', '[data-theme="dark"]'],
     theme: {
         daisyui: {
-            themes: [],
+            themes: ["light", "dark"],
         },
         extend: {
             animation: {
@@ -14,8 +15,8 @@ export default {
             },
             keyframes: {
                 "line-shadow": {
-                    "0%": { "background-position": "0 0" },
-                    "100%": { "background-position": "100% -100%" },
+                    "0%": {"background-position": "0 0"},
+                    "100%": {"background-position": "100% -100%"},
                 },
             },
             colors: {
