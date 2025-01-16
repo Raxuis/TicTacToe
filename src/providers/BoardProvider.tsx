@@ -238,7 +238,8 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         gameTypeIsSolo,
         switchCurrentPlayer,
         deleteCurrentGame,
-        placeMove
+        placeMove,
+        moves,
     }
 
     return (

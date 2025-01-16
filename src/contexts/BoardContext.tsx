@@ -27,6 +27,10 @@ export type BoardContextType = {
     gameTypeIsSolo: (gameType?: TicTacToesTypes) => boolean;
     switchCurrentPlayer: () => void;
     placeMove: (col: number, row: number) => void;
+    moves: Array<{
+        player: Player,
+        position: [number, number]
+    }>;
 }
 
 export const BoardContext = createContext<BoardContextType>({
@@ -75,5 +79,6 @@ export const BoardContext = createContext<BoardContextType>({
     switchCurrentPlayer: () => {
     },
     placeMove: () => {
-    }
+    },
+    moves : []
 });

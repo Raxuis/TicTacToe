@@ -30,6 +30,8 @@ const Board = () => {
                             <Cell cellValue={cellValue}
                                   key={`${rowIndex}-${colIndex}`}
                                   onClick={() => handleClick(rowIndex, colIndex)}
+                                  row={rowIndex}
+                                  col={colIndex}
                             />
                         )
                     })
