@@ -28,5 +28,10 @@ export type GameStats = {
 export type ScoreboardType = {
     username: string,
     winStreak: number,
-    timestamp: number
+    timestamp: number,
+    boardType: TicTacToesTypes
+}
+
+export type ScoreboardTypeWithRank = ScoreboardType & {
+    rank: number
 }
