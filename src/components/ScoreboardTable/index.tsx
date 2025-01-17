@@ -1,18 +1,10 @@
-import {ticTacToes} from "@/constants";
 import {ScoreboardType, ScoreboardTypeWithRank} from "@/types";
 import {Crown} from "lucide-react";
+import {getCorrespondingBoardType, containsRank} from "@/utils";
 
 const ScoreboardTable = ({scoreboard}: {
     scoreboard: ScoreboardTypeWithRank[] | ScoreboardType[]
 }) => {
-    const getCorrespondingBoardType = (boardType: string) => {
-        return ticTacToes.find(ticTacToe => ticTacToe.value === boardType)?.title;
-    }
-
-    const containsRank = (scoreboard: ScoreboardTypeWithRank[] | ScoreboardType[]): scoreboard is ScoreboardTypeWithRank[] => {
-        return (scoreboard as ScoreboardTypeWithRank[])[0].rank !== undefined;
-    }
-
     return (
         <table className="table table-md text-gray-dark dark:text-primary font-light cursor-default">
             <thead>

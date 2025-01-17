@@ -4,7 +4,7 @@ import ResetButton from "./ResetButton";
 
 const HeaderBoard = () => {
     return (
-        <div className="flex justify-center items-center gap-8 mb-14">
+        <div className="flex justify-center items-center gap-8 mb-7">
             <BoardIcons/>
             <PlayerTurnInfo/>
             <ResetButton/>

@@ -1,12 +1,13 @@
 import {useEffect} from "react";
-import WinnerInfo from "@/components/WinnerInfo";
 import {useLocation, useNavigate} from "react-router";
-import Board from "@/components/Board";
-import PlayersInfo from "@/components/PlayersInfo";
-import HeaderBoard from "@/components/Board/HeaderBoard";
+import Board from "@/components/Game/Board";
+import PlayersInfo from "@/components/Game/PlayersInfo";
+import HeaderBoard from "@/components/Game/Board/HeaderBoard";
 import {TicTacToesTypes} from "@/types";
 import {useBoard} from "@/hooks/useBoard.tsx";
-import DeleteCurrentGame from "@/components/Board/DeleteCurrentGame";
+import DeleteCurrentGame from "@/components/Game/Board/DeleteCurrentGame";
+import GameDescription from "@/components/Game/GameDescription";
+import WinnerInfo from "@/components/Game/WinnerInfo";
 
 const TicTacToe = () => {
     const {
@@ -40,6 +41,8 @@ const TicTacToe = () => {
     return (
         <div className="flex flex-col justify-center items-center">
             <HeaderBoard/>
+
+            <GameDescription/>
 
             <Board/>
 
