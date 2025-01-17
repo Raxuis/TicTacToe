@@ -23,7 +23,7 @@ export type BoardContextType = {
     gameStats: GameStats;
     setGameStats: Dispatch<SetStateAction<GameStats>>;
     gameTypeIsSolo: (gameType?: TicTacToesTypes) => boolean;
-    switchCurrentPlayer: () => void;
+    switchCurrentPlayer: (newBoard: BoardPlayer[][]) => void;
     placeMove: (col: number, row: number) => void;
     moves: Array<{
         player: Player,
