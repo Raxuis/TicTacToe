@@ -133,65 +133,68 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     };
 
     const checkWinner = (tab: BoardPlayer[][]) => {
-        const currentWinner = getWinnerStatus(tab);
+            const currentWinner = getWinnerStatus(tab);
 
-        if (currentWinner) {
+            if (currentWinner) {
 
-            let newGameStats = structuredClone(gameStats);
-            newGameStats.playerTurn = "X";
+                let newGameStats = structuredClone(gameStats);
+                newGameStats.playerTurn = "X";
 
-            if ("O" === currentWinner.symbol) {
-                if (gameTypeIsSolo() && username) {
-                    newGameStats = {
-                        ...newGameStats,
-                        player1Wins: 0,
-                        ties: 0,
-                        player2Wins: 0,
-                        playerTurn: "X"
-                    };
+                if ("O" === currentWinner.symbol) {
+                    if (gameTypeIsSolo() && username) {
+                        newGameStats = {
+                            ...newGameStats,
+                            player1Wins: 0,
+                            ties: 0,
+                            player2Wins: 0,
+                            playerTurn: "X"
+                        };
 
-                    const newScoreboard: ScoreboardType = {
-                        username: username,
-                        boardType: gameStats.boardType,
-                        winStreak: gameStats.player1Wins,
-                        timestamp: Date.now(),
-                    };
-                    setScoreboard((prevScoreBoard: ScoreboardType[]) => [...prevScoreBoard, newScoreboard]);
+                        const newScoreboard: ScoreboardType = {
+                            username: username,
+                            boardType: gameStats.boardType,
+                            winStreak: gameStats.player1Wins,
+                            timestamp: Date.now(),
+                        };
+                        if (newScoreboard.winStreak > 0) {
+                            setScoreboard((prevScoreBoard: ScoreboardType[]) => [...prevScoreBoard, newScoreboard]);
+                        }
+                    } else {
+                        newGameStats.player2Wins++;
+                    }
                 } else {
-                    newGameStats.player2Wins++;
+                    newGameStats.player1Wins++;
                 }
-            } else {
-                newGameStats.player1Wins++;
+
+                setGameStats(newGameStats);
+
+                setWinner(currentWinner?.symbol || null);
+                setWinningCells(currentWinner?.pattern);
+                setShowModal(true);
+                setMoves([]);
+
+                setTimeout(() => {
+                    setBoard(initialBoard);
+                    setWinningCells([]);
+                }, 2000);
+                return;
             }
 
-            setGameStats(newGameStats);
+            if (!winner && tab.flat().every((cell) => cell !== "")) {
+                setWinner("Draw");
+                setShowModal(true);
+                setMoves([]);
 
-            setWinner(currentWinner?.symbol || null);
-            setWinningCells(currentWinner?.pattern);
-            setShowModal(true);
-            setMoves([]);
+                setGameStats((prevStats: GameStats) => ({
+                    ...prevStats,
+                    playerTurn: "X",
+                    ties: (prevStats.ties || 0) + 1
+                }));
 
-            setTimeout(() => {
-                setBoard(initialBoard);
-                setWinningCells([]);
-            }, 2000);
-            return;
+                setTimeout(() => setBoard(initialBoard), 2000);
+            }
         }
-
-        if (!winner && tab.flat().every((cell) => cell !== "")) {
-            setWinner("Draw");
-            setShowModal(true);
-            setMoves([]);
-
-            setGameStats((prevStats: GameStats) => ({
-                ...prevStats,
-                playerTurn: "X",
-                ties: (prevStats.ties || 0) + 1
-            }));
-
-            setTimeout(() => setBoard(initialBoard), 2000);
-        }
-    };
+    ;
 
 
     const resetBoard = () => {
