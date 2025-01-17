@@ -7,7 +7,8 @@ const Board = () => {
         currentPlayer,
         winner,
         placeMove,
-        gameTypeIsSolo
+        gameTypeIsSolo,
+        winningCells
     } = useBoard();
 
     const handleClick = (
@@ -32,6 +33,7 @@ const Board = () => {
                                   onClick={() => handleClick(rowIndex, colIndex)}
                                   row={rowIndex}
                                   col={colIndex}
+                                  winningCells={winningCells}
                             />
                         )
                     })

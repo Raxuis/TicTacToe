@@ -1,10 +1,11 @@
-import {FormEvent, useState} from "react";
+import {FormEvent, useContext, useMemo, useState} from "react";
 import {ticTacToes} from "@/constants";
 import Button from "@/components/Button";
 import {useNavigate} from "react-router";
 import {TicTacToe} from "@/types";
 import {useBoard} from "@/hooks/useBoard.tsx";
 import {LineShadowText} from "@/components/LineShadowText";
+import {ThemeContext} from "@/contexts/ThemeContext.tsx";
 
 const Homepage = () => {
     const [type, setType] = useState<TicTacToe>({
@@ -16,6 +17,8 @@ const Homepage = () => {
     const [error, setError] = useState<string>();
 
     const {gameStats, gameTypeIsSolo} = useBoard();
+
+    const {theme} = useContext(ThemeContext);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>, action: "RESUME" | "START") => {
         e.preventDefault()
@@ -50,13 +53,18 @@ const Homepage = () => {
         gameStats.username
     );
 
+    const shadowColor = useMemo(
+        () => (theme === "dark" ? "yellow" : "#203741"),
+        [theme]
+    );
+
 
     return (
         <>
             <div className="w-full max-lg:px-7">
                 <h1 className="text-primary text-5xl font-semibold leading-none tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl">
                     Welcome to
-                    <LineShadowText className="italic text-secondary" shadowColor="yellow">
+                    <LineShadowText className="italic text-gray-dark dark:text-secondary" shadowColor={shadowColor}>
                         TicTacToe
                     </LineShadowText>
                     {" "}

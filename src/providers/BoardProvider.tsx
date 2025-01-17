@@ -10,6 +10,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     const [currentPlayer, setCurrentPlayer] = useState<Player>("X");
     const [username, setUsername] = useState("");
     const [winner, setWinner] = useState<Winner | null>(null);
+    const [winningCells, setWinningCells] = useState<number[][]>([]);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [boardType, setBoardType] = useState<TicTacToesTypes>("");
     const [gameStats, setGameStats] = useLocalStorage<GameStats>("gameStats", {
@@ -100,42 +101,47 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
 
 
     const checkWinner = (tab: BoardPlayer[][]) => {
-        const tabToCheck: BoardPlayer[][] = [
+        const winningPatterns: [number, number][][] = [
             // Lignes
-            [tab[0][0], tab[0][1], tab[0][2]],
-            [tab[1][0], tab[1][1], tab[1][2]],
-            [tab[2][0], tab[2][1], tab[2][2]],
+            [[0, 0], [0, 1], [0, 2]],
+            [[1, 0], [1, 1], [1, 2]],
+            [[2, 0], [2, 1], [2, 2]],
             // Colonnes
-            [tab[0][0], tab[1][0], tab[2][0]],
-            [tab[0][1], tab[1][1], tab[2][1]],
-            [tab[0][2], tab[1][2], tab[2][2]],
+            [[0, 0], [1, 0], [2, 0]],
+            [[0, 1], [1, 1], [2, 1]],
+            [[0, 2], [1, 2], [2, 2]],
             // Diagonales
-            [tab[0][0], tab[1][1], tab[2][2]],
-            [tab[0][2], tab[1][1], tab[2][0]]
-        ]
+            [[0, 0], [1, 1], [2, 2]],
+            [[0, 2], [1, 1], [2, 0]]
+        ];
 
-        for (const row of tabToCheck) {
-            if (row.every(cell => cell === "X")) {
-                setWinner("X");
-                setShowModal(true);
-                setBoard(initialBoard);
-                return
-            }
+        for (const pattern of winningPatterns) {
+            const [[x1, y1], [x2, y2], [x3, y3]] = pattern;
 
-            if (row.every(cell => cell === "O")) {
-                setWinner("O");
+            if (
+                tab[x1][y1] !== "" &&
+                tab[x1][y1] === tab[x2][y2] &&
+                tab[x1][y1] === tab[x3][y3]
+            ) {
+                setWinner(tab[x1][y1]);
+                setWinningCells(pattern);
                 setShowModal(true);
-                setBoard(initialBoard);
-                return
+                setTimeout(() => {
+                    setBoard(initialBoard);
+                    setWinningCells([]);
+                }, 2000);
+                return;
             }
         }
 
-        if (tabToCheck.flat().every((cell) => cell !== "")) {
+        if (!winner && tab.flat().every((cell) => cell !== "")) {
             setWinner("Draw");
             setShowModal(true);
-            setBoard(initialBoard);
+
+            setTimeout(() => setBoard(initialBoard), 2000);
         }
-    }
+    };
+
 
     const resetBoard = () => {
         setBoard(initialBoard);
@@ -226,6 +232,8 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         deleteCurrentGame,
         placeMove,
         moves,
+        winningCells,
+        setWinningCells
     }
 
     return (
