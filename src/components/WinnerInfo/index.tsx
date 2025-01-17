@@ -1,6 +1,4 @@
 import {useNavigate} from "react-router";
-import {useLocalStorage} from "@/hooks/useLocalStorage.ts";
-import {GameStats, ScoreboardType} from "@/types";
 import {useBoard} from "@/hooks/useBoard.tsx";
 import ButtonClickEffect from "../ButtonClickEffect";
 import cross from "@/assets/cross.svg";
@@ -9,80 +7,18 @@ import {cn} from "@/libs/cn.ts";
 
 
 const WinnerInfo = () => {
-    const [, setScoreboard] = useLocalStorage<ScoreboardType[]>("scoreboard", []);
 
     const {
         winner,
         showModal,
         setShowModal,
-        username,
-        gameStats,
-        setGameStats,
         resetBoard,
         gameTypeIsSolo,
     } = useBoard();
 
 
-    const handleClick = (action: "NEXT" | "QUIT") => {
-        if (winner === "O" && username && gameTypeIsSolo()) {
-            setScoreboard(prevScoreBoard => [...prevScoreBoard, {
-                username: username,
-                boardType: gameStats.boardType,
-                winStreak: gameStats.player1Wins,
-                timestamp: Date.now(),
-            }]);
-
-
-            setGameStats({
-                ...gameStats,
-                player1Wins: 0,
-                ties: 0,
-                player2Wins: 0,
-                playerTurn: "X"
-            })
-        }
-
-        if ((
-            action === "NEXT" && winner !== null
-        ) && (
-            gameTypeIsSolo() && winner !== "O" || !gameTypeIsSolo()
-        )) {
-            setGameStats((prevStats: GameStats) => {
-                const updatedStats = {...prevStats};
-                updatedStats.playerTurn = "X";
-
-                if (winner === "X") {
-                    updatedStats.player1Wins = (prevStats.player1Wins || 0) + 1;
-                } else if (winner === "O") {
-                    updatedStats.player2Wins = (prevStats.player2Wins || 0) + 1;
-                } else if (winner === "Draw") {
-                    updatedStats.ties = (prevStats.ties || 0) + 1;
-                }
-
-                return updatedStats;
-            });
-        } else if (action === "QUIT") {
-            setScoreboard(prevScoreBoard => [...prevScoreBoard, {
-                username: username,
-                boardType: gameStats.boardType,
-                winStreak: gameStats.player1Wins,
-                timestamp: Date.now()
-            }]);
-
-            setGameStats({
-                username: "",
-                boardType: "",
-                player1Wins: 0,
-                ties: 0,
-                player2Wins: 0,
-                playerTurn: "X"
-            });
-        }
-
-        if (action === "NEXT" || action === "QUIT") {
-            resetBoard();
-        }
-
+    const handleClick = () => {
+        resetBoard();
         setShowModal(false);
     };
 
@@ -126,14 +62,14 @@ const WinnerInfo = () => {
                     <div className="flex justify-center gap-4 pt-2">
                         <ButtonClickEffect className="bg-primary text-gray-dark cursor-pointer shadow-buttonGreyLight"
                                            onClick={() => {
-                                               handleClick("QUIT");
+                                               handleClick();
                                                navigate("/");
                                            }}>
                             QUIT
                         </ButtonClickEffect>
                         <ButtonClickEffect
                             className="bg-secondary text-gray-dark cursor-pointer shadow-buttonSecondary"
-                            onClick={() => handleClick("NEXT")}>
+                            onClick={() => handleClick()}>
                             NEXT ROUND
                         </ButtonClickEffect>
                     </div>
