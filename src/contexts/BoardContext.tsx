@@ -29,6 +29,8 @@ export type BoardContextType = {
         player: Player,
         position: [number, number]
     }>;
+    winningCells: number[][];
+    setWinningCells: Dispatch<SetStateAction<number[][]>>;
 }
 
 export const BoardContext = createContext<BoardContextType>({
@@ -75,5 +77,8 @@ export const BoardContext = createContext<BoardContextType>({
     },
     placeMove: () => {
     },
-    moves: []
+    moves: [],
+    winningCells: [],
+    setWinningCells: () => {
+    }
 });
