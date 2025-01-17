@@ -284,6 +284,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         setGameStats,
         giveUpGame,
         gameTypeIsSolo,
+        gameTypeIsSpecial,
         switchCurrentPlayer,
         deleteCurrentGame,
         placeMove,

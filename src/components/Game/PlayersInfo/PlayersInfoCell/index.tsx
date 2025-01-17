@@ -1,14 +1,14 @@
 import {PlayersInfoCellTypes} from "@/types";
 import {cn} from "@/libs/cn.ts";
 import {useBoard} from "@/hooks/useBoard.tsx";
-import {useMemo} from "react";
+import {memo, useMemo} from "react";
 
 type PlayersInfoCellProps = {
     data: number,
     type: PlayersInfoCellTypes,
 }
 
-const PlayersInfoCell = ({data, type}: PlayersInfoCellProps) => {
+const PlayersInfoCell = memo(({data, type}: PlayersInfoCellProps) => {
     const {gameTypeIsSolo} = useBoard();
     const isSoloGame = gameTypeIsSolo();
 
@@ -41,6 +41,6 @@ const PlayersInfoCell = ({data, type}: PlayersInfoCellProps) => {
             {data}
         </div>
     );
-};
+});
 
 export default PlayersInfoCell;
