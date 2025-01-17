@@ -169,6 +169,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
             setWinner(currentWinner?.symbol || null);
             setWinningCells(currentWinner?.pattern);
             setShowModal(true);
+            setMoves([]);
 
             setTimeout(() => {
                 setBoard(initialBoard);
@@ -180,6 +181,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         if (!winner && tab.flat().every((cell) => cell !== "")) {
             setWinner("Draw");
             setShowModal(true);
+            setMoves([]);
 
             setGameStats((prevStats: GameStats) => ({
                 ...prevStats,
