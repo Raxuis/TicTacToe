@@ -36,9 +36,12 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         return gameType.includes("special");
     }
 
+    const isGameTie = (newBoard: BoardPlayer[][]) => {
+        return newBoard.flat().every(cell => cell !== "");
+    }
 
     const switchCurrentPlayer = (newBoard: BoardPlayer[][]) => {
-        if (getWinnerStatus(newBoard)) return;
+        if (getWinnerStatus(newBoard) || isGameTie(newBoard)) return;
 
         const playerTurn = currentPlayer === "X"
             ? "O"
@@ -180,17 +183,17 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
                 return;
             }
 
-            if (!winner && tab.flat().every((cell) => cell !== "")) {
+            if (!currentWinner && isGameTie(tab)) {
                 setWinner("Draw");
                 setShowModal(true);
-                setMoves([]);
 
                 setGameStats((prevStats: GameStats) => ({
                     ...prevStats,
                     playerTurn: "X",
-                    ties: (prevStats.ties || 0) + 1
+                    ties: prevStats.ties + 1
                 }));
 
+                setMoves([]);
                 setTimeout(() => setBoard(initialBoard), 2000);
             }
         }
