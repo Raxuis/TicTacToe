@@ -22,14 +22,14 @@ const HeaderDropdown = memo(({open, setOpen, headerLinks}: HeaderDropdownProps) 
         if (!link.needsVerification) return true;
 
         return gameTypeIsSolo()
-            ? gameStats.boardType && gameStats.username
-            : gameStats.boardType;
+            ? gameStats.gameMode && gameStats.username
+            : gameStats.gameMode;
     };
 
     const handleGameClick = () => {
         if (isVerified({to: "/tic-tac-toe", text: "Game", needsVerification: true})) {
             navigate("/tic-tac-toe", {
-                state: {username: gameStats.username, boardType: gameStats.boardType},
+                state: {username: gameStats.username, gameMode: gameStats.gameMode},
             });
         }
     };

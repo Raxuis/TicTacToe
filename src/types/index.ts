@@ -12,13 +12,13 @@ export type Winner = Player | "Draw";
 
 export type BoardPlayer = Player | "";
 
-export type TicTacToesTypes = typeof ticTacToes[number]['value']
+export type GameModeTypes = typeof ticTacToes[number]['value']
 
 export type PlayersInfoCellTypes = "Player1Wins" | "Player2Wins" | "Ties"
 
 export type GameStats = {
     username: string,
-    boardType: TicTacToesTypes
+    gameMode: GameModeTypes
     player1Wins: number,
     ties: number,
     player2Wins: number,
@@ -29,7 +29,7 @@ export type ScoreboardType = {
     username: string,
     winStreak: number,
     timestamp: number,
-    boardType: TicTacToesTypes
+    gameMode: GameModeTypes
 }
 
 export type ScoreboardTypeWithRank = ScoreboardType & {

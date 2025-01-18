@@ -2,10 +2,10 @@ import {useBoard} from "@/hooks/useBoard.tsx";
 import {getCorrespondingBoardType} from "@/utils";
 
 const GameDescription = () => {
-    const {boardType} = useBoard();
+    const {gameMode} = useBoard();
     return (
         <p className="mb-7">
-            {getCorrespondingBoardType(boardType)}
+            {getCorrespondingBoardType(gameMode)}
         </p>
     );
 };

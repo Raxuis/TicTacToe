@@ -3,7 +3,7 @@ import {useLocation, useNavigate} from "react-router";
 import Board from "@/components/Game/Board";
 import PlayersInfo from "@/components/Game/PlayersInfo";
 import HeaderBoard from "@/components/Game/Board/HeaderBoard";
-import {TicTacToesTypes} from "@/types";
+import {GameModeTypes} from "@/types";
 import {useBoard} from "@/hooks/useBoard.tsx";
 import DeleteCurrentGame from "@/components/Game/Board/DeleteCurrentGame";
 import GameDescription from "@/components/Game/GameDescription";
@@ -12,7 +12,7 @@ import WinnerInfo from "@/components/Game/WinnerInfo";
 const TicTacToe = () => {
     const {
         setUsername,
-        setBoardType,
+        setGameMode,
         gameTypeIsSolo
     } = useBoard();
 
@@ -20,20 +20,21 @@ const TicTacToe = () => {
 
     const location = useLocation();
 
+    // Je récupère les données de la page précédente
     useEffect(() => {
         const username: string = location.state?.username;
-        const boardType: TicTacToesTypes = location.state?.boardType;
+        const gameMode: GameModeTypes = location.state?.gameMode;
 
         if (
             (
                 !username &&
-                gameTypeIsSolo(boardType)
-            ) || !boardType
+                gameTypeIsSolo(gameMode)
+            ) || !gameMode
         ) {
             navigate("/");
         } else {
             setUsername(username);
-            setBoardType(boardType);
+            setGameMode(gameMode);
         }
     }, []);
 

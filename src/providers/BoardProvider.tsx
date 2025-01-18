@@ -1,6 +1,6 @@
 import {ReactNode, useEffect, useState} from "react";
 import {BoardContext} from "@/contexts/BoardContext.tsx";
-import {BoardPlayer, GameStats, Player, ScoreboardType, TicTacToesTypes, Winner} from "@/types";
+import {BoardPlayer, GameModeTypes, GameStats, Player, ScoreboardType, Winner} from "@/types";
 import {initialBoard} from "@/constants";
 import {useLocalStorage} from "@/hooks/useLocalStorage.ts";
 
@@ -10,12 +10,13 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     const [currentPlayer, setCurrentPlayer] = useState<Player>("X");
     const [username, setUsername] = useState("");
     const [winner, setWinner] = useState<Winner | null>(null);
+    // 👇 Permet de stocker les cellules gagnantes pour les mettre en surbrillance plus tard
     const [winningCells, setWinningCells] = useState<number[][]>([]);
     const [showModal, setShowModal] = useState<boolean>(false);
-    const [boardType, setBoardType] = useState<TicTacToesTypes>("");
+    const [gameMode, setGameMode] = useState<GameModeTypes>("");
     const [gameStats, setGameStats] = useLocalStorage<GameStats>("gameStats", {
         username: "",
-        boardType: "",
+        gameMode: "",
         player1Wins: 0,
         ties: 0,
         player2Wins: 0,
@@ -28,11 +29,11 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     const [, setScoreboard] = useLocalStorage<ScoreboardType[]>("scoreboard", []);
 
 
-    const gameTypeIsSolo = (gameType: TicTacToesTypes = boardType) => {
+    const gameTypeIsSolo = (gameType: GameModeTypes = gameMode) => {
         return gameType.includes("solo");
     }
 
-    const gameTypeIsSpecial = (gameType: TicTacToesTypes = boardType) => {
+    const gameTypeIsSpecial = (gameType: GameModeTypes = gameMode) => {
         return gameType.includes("special");
     }
 
@@ -121,6 +122,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         ];
 
         for (const pattern of winningPatterns) {
+            // Pattern pour check si les 3 cases sont identiques
             const [[x1, y1], [x2, y2], [x3, y3]] = pattern;
 
             const winningCondition =
@@ -144,6 +146,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
                 newGameStats.playerTurn = "X";
 
                 if ("O" === currentWinner.symbol) {
+                    // Check si le mot de jeu est solo et si le nom d'utilisateur est défini
                     if (gameTypeIsSolo() && username) {
                         newGameStats = {
                             ...newGameStats,
@@ -155,10 +158,11 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
 
                         const newScoreboard: ScoreboardType = {
                             username: username,
-                            boardType: gameStats.boardType,
+                            gameMode: gameStats.gameMode,
                             winStreak: gameStats.player1Wins,
                             timestamp: Date.now(),
                         };
+
                         if (newScoreboard.winStreak > 0) {
                             setScoreboard((prevScoreBoard: ScoreboardType[]) => [...prevScoreBoard, newScoreboard]);
                         }
@@ -223,11 +227,10 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     }
 
     const deleteCurrentGame = () => {
-
         resetBoard();
         setGameStats({
             username: "",
-            boardType: "",
+            gameMode: "",
             playerTurn: "X",
             player1Wins: 0,
             ties: 0,
@@ -236,6 +239,7 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     }
 
     useEffect(() => {
+        // Permet de faire jouer le bot 🤖
         if ((gameTypeIsSolo() && currentPlayer === "O") && !winner) {
             const timer = setTimeout(playBot, 500);
             return () => clearTimeout(timer);
@@ -244,15 +248,15 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
     }, [currentPlayer]);
 
     useEffect(() => {
-        if (boardType !== "" && username !== "") {
+        if (gameMode !== "" && username !== "") {
             setGameStats((prevStats) => ({
                 ...prevStats,
-                boardType,
+                gameMode,
                 username,
                 playerTurn: prevStats.playerTurn || "X"
             }));
         }
-    }, [username, boardType]);
+    }, [username, gameMode]);
 
 
     useEffect(() => {
@@ -273,8 +277,8 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
         resetBoard,
         username,
         setUsername,
-        boardType,
-        setBoardType,
+        gameMode,
+        setGameMode,
         gameStats,
         giveUpGame,
         gameTypeIsSolo,
