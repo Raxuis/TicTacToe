@@ -266,31 +266,23 @@ export const BoardProvider = ({children}: { children: ReactNode }) => {
 
     const contextValue = {
         board,
-        setBoard,
         currentPlayer,
-        setCurrentPlayer,
         winner,
-        setWinner,
-        checkWinner,
         showModal,
         setShowModal,
         resetBoard,
-        playBot,
         username,
         setUsername,
         boardType,
         setBoardType,
         gameStats,
-        setGameStats,
         giveUpGame,
         gameTypeIsSolo,
         gameTypeIsSpecial,
-        switchCurrentPlayer,
         deleteCurrentGame,
         placeMove,
         moves,
-        winningCells,
-        setWinningCells
+        winningCells
     }
 
     return (

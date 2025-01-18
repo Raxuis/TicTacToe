@@ -7,31 +7,23 @@ export type BoardContextType = {
     deleteCurrentGame: () => void;
     resetBoard: () => void;
     board: BoardPlayer[][];
-    setBoard: Dispatch<SetStateAction<BoardPlayer[][]>>;
     currentPlayer: Player;
-    setCurrentPlayer: Dispatch<SetStateAction<Player>>;
     winner: Winner | null;
-    setWinner: Dispatch<SetStateAction<Winner | null>>;
-    checkWinner: (tab: BoardPlayer[][]) => void;
     showModal: boolean;
     setShowModal: Dispatch<SetStateAction<boolean>>;
-    playBot: () => void;
     username: string;
     setUsername: Dispatch<SetStateAction<string>>;
     boardType: TicTacToesTypes;
     setBoardType: Dispatch<SetStateAction<TicTacToesTypes>>;
     gameStats: GameStats;
-    setGameStats: Dispatch<SetStateAction<GameStats>>;
     gameTypeIsSolo: (gameType?: TicTacToesTypes) => boolean;
     gameTypeIsSpecial: (gameType?: TicTacToesTypes) => boolean;
-    switchCurrentPlayer: (newBoard: BoardPlayer[][]) => void;
     placeMove: (col: number, row: number) => void;
     moves: Array<{
         player: Player,
         position: [number, number]
     }>;
     winningCells: number[][];
-    setWinningCells: Dispatch<SetStateAction<number[][]>>;
 }
 
 export const BoardContext = createContext<BoardContextType>({
@@ -42,20 +34,10 @@ export const BoardContext = createContext<BoardContextType>({
     resetBoard: () => {
     },
     board: initialBoard,
-    setBoard: () => {
-    },
     currentPlayer: "X",
-    setCurrentPlayer: () => {
-    },
     winner: null,
-    setWinner: () => {
-    },
-    checkWinner: () => {
-    },
     showModal: false,
     setShowModal: () => {
-    },
-    playBot: () => {
     },
     username: "",
     setUsername: () => {
@@ -71,16 +53,10 @@ export const BoardContext = createContext<BoardContextType>({
         player2Wins: 0,
         playerTurn: "X"
     },
-    setGameStats: () => {
-    },
     gameTypeIsSolo: () => false,
     gameTypeIsSpecial: () => false,
-    switchCurrentPlayer: () => {
-    },
     placeMove: () => {
     },
     moves: [],
     winningCells: [],
-    setWinningCells: () => {
-    }
 });
