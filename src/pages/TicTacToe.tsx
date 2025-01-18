@@ -8,6 +8,7 @@ import {useBoard} from "@/hooks/useBoard.tsx";
 import DeleteCurrentGame from "@/components/Game/Board/DeleteCurrentGame";
 import GameDescription from "@/components/Game/GameDescription";
 import WinnerInfo from "@/components/Game/WinnerInfo";
+import {motion} from "motion/react";
 
 const TicTacToe = () => {
     const {
@@ -40,7 +41,18 @@ const TicTacToe = () => {
 
 
     return (
-        <div className="flex flex-col justify-center items-center">
+        <motion.div
+            className="flex flex-col justify-center items-center"
+            initial={{
+                opacity: 0,
+            }}
+            animate={{
+                opacity: 1,
+            }}
+            transition={{
+                duration: 0.3,
+            }}
+        >
             <HeaderBoard/>
 
             <GameDescription/>
@@ -52,7 +64,7 @@ const TicTacToe = () => {
             <WinnerInfo/>
 
             <DeleteCurrentGame/>
-        </div>
+        </motion.div>
     );
 };
 

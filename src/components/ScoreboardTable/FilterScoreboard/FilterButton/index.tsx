@@ -13,9 +13,9 @@ const FilterButton = ({onClick, children, className, isActive}: FilterButtonProp
     return (
         <Button className={
             cn(
-                'block hover:bg-primary/70 hover:text-black duration-300',
+                'block hover:bg-primary/70 duration-300 text-white',
                 className,
-                isActive && 'bg-primary/70 text-black'
+                isActive && 'bg-primary/70'
             )
         } onClick={onClick}>
             <div className="flex items-center justify-center gap-2">

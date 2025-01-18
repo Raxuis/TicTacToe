@@ -1,12 +1,16 @@
 import {ScoreboardType, ScoreboardTypeWithRank} from "@/types";
 import {Crown} from "lucide-react";
 import {getCorrespondingBoardType, containsRank} from "@/utils";
+import {motion} from "motion/react";
 
 const ScoreboardTable = ({scoreboard}: {
     scoreboard: ScoreboardTypeWithRank[] | ScoreboardType[]
 }) => {
     return (
-        <table className="table table-md text-gray-dark dark:text-primary font-light cursor-default">
+        <motion.table
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            className="table table-md text-gray-dark dark:text-primary font-light cursor-default">
             <thead>
             <tr className="text-gray-dark dark:text-primary text-lg text-center">
                 <th></th>
@@ -51,7 +55,7 @@ const ScoreboardTable = ({scoreboard}: {
                     ))
             }
             </tbody>
-        </table>
+        </motion.table>
     );
 };
 
