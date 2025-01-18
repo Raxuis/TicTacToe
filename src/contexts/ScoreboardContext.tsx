@@ -9,7 +9,7 @@ export type ScoreboardContextType = {
 }
 
 export const ScoreboardContext = createContext<ScoreboardContextType>({
-    filter: "DATE",
+    filter: "WIN_STREAK",
     scoreboard: [],
     filteredScoreboard: [],
     setFilter: () => {

@@ -5,7 +5,8 @@ import {ScoreboardContext} from "@/contexts/ScoreboardContext.tsx";
 
 export const ScoreboardProvider = ({children}: { children: ReactNode }) => {
     const [scoreboard] = useLocalStorage<ScoreboardType[]>("scoreboard", []);
-    const [filter, setFilter] = useState<"WIN_STREAK" | "DATE">("DATE");
+    // Filter est initialisé à "WIN_STREAK" comme demandé, mais modifiable quand même
+    const [filter, setFilter] = useState<"WIN_STREAK" | "DATE">("WIN_STREAK");
 
     const sortedScoreboardByWinStreak: ScoreboardType[] = [...scoreboard].sort(
         (a, b) => b.winStreak - a.winStreak
