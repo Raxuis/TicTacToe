@@ -1,6 +1,6 @@
-import PlayersInfoCell from "./PlayersInfoCell";
 import {useBoard} from "@/hooks/useBoard.tsx";
 import {cn} from "@/libs/cn.ts";
+import PlayersInfoCell from "./PlayersInfoCell";
 
 const PlayersInfo = () => {
     const {gameStats, gameTypeIsSpecial} = useBoard();
