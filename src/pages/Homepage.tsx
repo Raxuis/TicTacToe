@@ -107,7 +107,7 @@ const Homepage = () => {
                             {
                                 (type.value === "solo" || type.value === "solo-special") && (
                                     <div className="flex flex-col space-y-2">
-                                        <label htmlFor="username">Your username</label>
+                                        <label htmlFor="username" className="text-gray-dark">Your username</label>
                                         <input name="username" id="username"
                                                onChange={e => setUsername(e.target.value)}
                                                defaultValue={username}
