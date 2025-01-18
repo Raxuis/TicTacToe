@@ -13,7 +13,7 @@ const FilterButton = ({onClick, children, className, isActive}: FilterButtonProp
     return (
         <Button className={
             cn(
-                'block hover:bg-primary/70 hover:text-black duration-300',
+                'block hover:bg-primary/70 hover:text-black duration-300 text-white dark:text-gray-dark',
                 className,
                 isActive && 'bg-primary/70 text-black'
             )
