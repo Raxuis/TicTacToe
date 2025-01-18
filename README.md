@@ -16,6 +16,7 @@
   <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
   <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
   <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
+<a href="#heavy_plus_sign-datas">Datas</a> &#xa0; | &#xa0;
   <a href="#memo-license">License</a> &#xa0; | &#xa0;
   <a href="https://github.com/Raxuis" target="_blank">Author</a>
 </p>
@@ -66,6 +67,12 @@ $ pnpm dev
 
 # The server will initialize in the <http://localhost:5173>
 ```
+
+## :heavy_plus_sign: Datas ##
+
+To add scoreboard datas you can paste the datas in the `src/model/scoreboard.txt` file in the localStorage with key **scoreboard**.
+
+```typescript
 
 ## :memo: License ##
 
