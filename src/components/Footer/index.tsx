@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import {
     GithubIcon,
     LinkedinIcon
@@ -14,7 +14,7 @@ const icons: Icon[] = [
     {icon: <LinkedinIcon/>, url: "https://www.linkedin.com/raphael-raclot"},
 ];
 
-export function Footer() {
+const Footer = memo(() => {
     return (
         <footer className="px-5 lg:px-10 p-5 max-w-7xl w-screen">
             <div
@@ -58,5 +58,7 @@ export function Footer() {
                 <p>© {new Date().getFullYear()} Tic-Tac-Toe. All rights reserved.</p>
             </div>
         </footer>
-    );
-}
+    )
+})
+
+export default Footer;

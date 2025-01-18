@@ -1,7 +1,7 @@
 import {MenuIcon} from "lucide-react";
 import {cn} from "@/libs/cn.ts";
 import {Link, useNavigate} from "react-router";
-import {Dispatch, SetStateAction} from "react";
+import {Dispatch, memo, SetStateAction} from "react";
 import {HeaderLinkType} from "@/components/Header";
 import {useBoard} from "@/hooks/useBoard.tsx";
 
@@ -11,7 +11,7 @@ type HeaderDropdownProps = {
     headerLinks: HeaderLinkType[]
 }
 
-const HeaderDropdown = ({open, setOpen, headerLinks}: HeaderDropdownProps) => {
+const HeaderDropdown = memo(({open, setOpen, headerLinks}: HeaderDropdownProps) => {
     // Le Dropdown est de DaisyUI, j'ai dû changer la logique pour fermer le menu avec les Links
     const navigate = useNavigate();
 
@@ -22,14 +22,14 @@ const HeaderDropdown = ({open, setOpen, headerLinks}: HeaderDropdownProps) => {
         if (!link.needsVerification) return true;
 
         return gameTypeIsSolo()
-            ? gameStats.boardType && gameStats.username
-            : gameStats.boardType;
+            ? gameStats.gameMode && gameStats.username
+            : gameStats.gameMode;
     };
 
     const handleGameClick = () => {
         if (isVerified({to: "/tic-tac-toe", text: "Game", needsVerification: true})) {
             navigate("/tic-tac-toe", {
-                state: {username: gameStats.username, boardType: gameStats.boardType},
+                state: {username: gameStats.username, gameMode: gameStats.gameMode},
             });
         }
     };
@@ -77,6 +77,6 @@ const HeaderDropdown = ({open, setOpen, headerLinks}: HeaderDropdownProps) => {
             </ul>
         </details>
     );
-};
+});
 
 export default HeaderDropdown;

@@ -23,6 +23,8 @@ const Homepage = () => {
     const handleSubmit = (e: FormEvent<HTMLFormElement>, action: "RESUME" | "START") => {
         e.preventDefault()
 
+        // J'ai décidé d'enlever les usernames lors du jeu en local en espérant que cela ne pose pas de problème... 🙃
+        // Cela évite d'avoir trop d'useState et des bugs potentiels.
 
         if (action === "START") {
             if (gameTypeIsSolo(type.value) && !username || username === "") {
@@ -34,22 +36,22 @@ const Homepage = () => {
                 return;
             }
             navigate('/tic-tac-toe', {
-                state: {username, boardType: type.value}
+                state: {username, gameMode: type.value}
             })
         } else {
             navigate('/tic-tac-toe', {
-                state: {username: gameStats.username, boardType: gameStats.boardType}
+                state: {username: gameStats.username, gameMode: gameStats.gameMode}
             })
         }
     }
 
-    const isValidGameState = (isSolo: boolean, boardType: string | undefined, username: string | undefined) => {
-        return boardType && (!isSolo || (isSolo && username));
+    const isValidGameState = (isSolo: boolean, gameMode: string | undefined, username: string | undefined) => {
+        return gameMode && (!isSolo || (isSolo && username));
     };
 
     const isGameStateValid = isValidGameState(
         gameTypeIsSolo(type.value),
-        gameStats.boardType,
+        gameStats.gameMode,
         gameStats.username
     );
 
@@ -107,7 +109,7 @@ const Homepage = () => {
                             {
                                 (type.value === "solo" || type.value === "solo-special") && (
                                     <div className="flex flex-col space-y-2">
-                                        <label htmlFor="username">Your username</label>
+                                        <label htmlFor="username" className="text-gray-dark">Your username</label>
                                         <input name="username" id="username"
                                                onChange={e => setUsername(e.target.value)}
                                                defaultValue={username}

@@ -12,7 +12,7 @@ const ScoreboardTable = ({scoreboard}: {
                 <th></th>
                 <th>Username</th>
                 <th>Win Streak</th>
-                <th>Board Type</th>
+                <th>Game Mode</th>
                 <th className="max-sm:hidden">Played At</th>
             </tr>
             </thead>
@@ -37,7 +37,7 @@ const ScoreboardTable = ({scoreboard}: {
                             </td>
                             <td>{score.username}</td>
                             <td>{score.winStreak}</td>
-                            <td>{getCorrespondingBoardType(score.boardType)}</td>
+                            <td>{getCorrespondingBoardType(score.gameMode)}</td>
                             <td className="max-sm:hidden">{new Date(score.timestamp).toLocaleString()}</td>
                         </tr>
                     )) : scoreboard.map((score, idx) => (
@@ -45,7 +45,7 @@ const ScoreboardTable = ({scoreboard}: {
                             <td>{idx + 1}</td>
                             <td>{score.username}</td>
                             <td>{score.winStreak}</td>
-                            <td>{getCorrespondingBoardType(score.boardType)}</td>
+                            <td>{getCorrespondingBoardType(score.gameMode)}</td>
                             <td>{new Date(score.timestamp).toLocaleString()}</td>
                         </tr>
                     ))
