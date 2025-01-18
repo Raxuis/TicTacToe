@@ -72,8 +72,6 @@ $ pnpm dev
 
 To add scoreboard datas you can paste the datas in the `src/model/scoreboard.txt` file in the localStorage with key **scoreboard**.
 
-```typescript
-
 ## :memo: License ##
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
