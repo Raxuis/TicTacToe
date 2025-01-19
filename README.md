@@ -1,4 +1,4 @@
-<h1 align="center">❌ Tictactoe ⭕</h1>
+<h1 align="center" id="top">❌ TicTacToe ⭕</h1>
 
 <p align="center">
   <img alt="Github top language" src="https://img.shields.io/github/languages/top/Raxuis/tictactoe?color=56BEB8">
