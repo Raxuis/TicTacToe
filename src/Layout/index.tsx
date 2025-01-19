@@ -10,9 +10,9 @@ const Layout = ({children}: { children: ReactNode }) => {
             <div className="flex flex-col h-screen justify-between">
                 <div className="mb-auto bg-white dark:bg-gray-dark">
                     <Header/>
-                    <div className="max-w-5xl mx-auto">
+                    <main className="max-w-5xl mx-auto">
                         {children}
-                    </div>
+                    </main>
                 </div>
                 <div className="flex flex-col justify-center items-center bg-white dark:bg-gray-dark">
                     <Footer/>
