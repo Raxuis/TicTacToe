@@ -15,7 +15,7 @@ const Button = ({children, className, onClick, type = 'button', ...props}: Butto
     return (
         <button
             type={type}
-            className={cn('block bg-gray-medium rounded-lg shadow-2xl shadow-primary/10 p-2 px-4 font-bold', className)}
+            className={cn('block bg-gray-medium hover:bg-gray-medium/95 rounded-lg shadow-2xl shadow-primary/10 p-2 px-4 font-bold', className)}
             onClick={onClick}
             {...props}
         >
