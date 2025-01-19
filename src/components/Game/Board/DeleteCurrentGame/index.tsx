@@ -10,7 +10,7 @@ const DeleteCurrentGame = () => {
     const navigate = useNavigate();
     return (
         <ButtonClickEffect
-            className="text-primary mt-6 shadow-buttonGrey hover:bg-gray-medium/90 dark:hover:bg-gray-medium/50"
+            className="text-primary mt-6 hover:bg-gray-medium/90 dark:hover:bg-gray-medium/50"
             onClick={() => {
                 deleteCurrentGame();
                 navigate("/");
