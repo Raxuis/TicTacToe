@@ -5,19 +5,21 @@ import {useBoard} from "@/hooks/useBoard.tsx";
 import {cn} from "@/libs/cn.ts";
 import {memo, useMemo} from "react";
 
+type CellProps = {
+    cellValue: BoardPlayer;
+    onClick: () => void;
+    row: number;
+    col: number;
+    winningCells: number[][];
+}
+
 const Cell = memo(({
                        cellValue,
                        onClick,
                        row,
                        col,
                        winningCells
-                   }: {
-    cellValue: BoardPlayer,
-    onClick: () => void,
-    row: number,
-    col: number,
-    winningCells: number[][],
-}) => {
+                   }: CellProps) => {
     const {moves, currentPlayer} = useBoard();
 
     const playerMoves = moves.filter(

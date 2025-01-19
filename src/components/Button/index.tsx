@@ -1,4 +1,4 @@
-import {cn} from "@/libs/cn.ts";
+import {cn} from "@/libs/cn";
 import {ButtonHTMLAttributes, ReactNode} from "react";
 
 type ButtonProps = {
@@ -7,6 +7,9 @@ type ButtonProps = {
     onClick?: () => void;
     type?: 'submit' | 'button' | 'reset';
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className' | 'onClick' | 'type'>;
+
+// Bouton simple possédant un style par défaut.
+// Il possède aussi toutes les propriétés d'un bouton HTML.
 
 const Button = ({children, className, onClick, type = 'button', ...props}: ButtonProps) => {
     return (
