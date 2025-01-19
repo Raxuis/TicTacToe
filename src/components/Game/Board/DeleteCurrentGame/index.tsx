@@ -1,5 +1,5 @@
 import ButtonClickEffect from "@/components/ButtonClickEffect";
-import {useBoard} from "@/hooks/useBoard.tsx";
+import {useBoard} from "@/hooks/useBoard.ts";
 import {useNavigate} from "react-router";
 
 // Ici, je crée un bouton qui permet de supprimer la partie en cours.

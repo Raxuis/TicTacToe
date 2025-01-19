@@ -1,5 +1,5 @@
 import {Clock, Trophy} from "lucide-react";
-import {useScoreboard} from "@/hooks/useScoreboard.tsx";
+import {useScoreboard} from "@/hooks/useScoreboard.ts";
 import FilterButton from "@/components/ScoreboardTable/FilterScoreboard/FilterButton";
 
 const FilterScoreboard = () => {

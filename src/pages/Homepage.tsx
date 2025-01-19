@@ -1,7 +1,7 @@
 import {FormEvent, useContext, useMemo, useState} from "react";
 import {useNavigate} from "react-router";
 import {TicTacToe} from "@/types";
-import {useBoard} from "@/hooks/useBoard.tsx";
+import {useBoard} from "@/hooks/useBoard.ts";
 import {LineShadowText} from "@/components/LineShadowText";
 import {ThemeContext} from "@/contexts/ThemeContext.tsx";
 import {motion} from "motion/react";

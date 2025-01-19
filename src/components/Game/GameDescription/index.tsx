@@ -1,4 +1,4 @@
-import {useBoard} from "@/hooks/useBoard.tsx";
+import {useBoard} from "@/hooks/useBoard.ts";
 import {getCorrespondingBoardType} from "@/utils";
 
 const GameDescription = () => {

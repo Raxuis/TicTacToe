@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router";
-import {useBoard} from "@/hooks/useBoard.tsx";
+import {useBoard} from "@/hooks/useBoard.ts";
 import ButtonClickEffect from "../../ButtonClickEffect";
 import cross from "@/assets/cross.svg";
 import circle from "@/assets/circle.svg";

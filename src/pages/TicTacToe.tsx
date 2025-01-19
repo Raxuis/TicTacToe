@@ -4,7 +4,7 @@ import Board from "@/components/Game/Board";
 import PlayersInfo from "@/components/Game/PlayersInfo";
 import HeaderBoard from "@/components/Game/Board/HeaderBoard";
 import {GameModeTypes} from "@/types";
-import {useBoard} from "@/hooks/useBoard.tsx";
+import {useBoard} from "@/hooks/useBoard.ts";
 import DeleteCurrentGame from "@/components/Game/Board/DeleteCurrentGame";
 import GameDescription from "@/components/Game/GameDescription";
 import WinnerInfo from "@/components/Game/WinnerInfo";

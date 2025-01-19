@@ -1,6 +1,6 @@
 import cross from "@/assets/cross.svg";
 import circle from "@/assets/circle.svg";
-import {useBoard} from "@/hooks/useBoard.tsx";
+import {useBoard} from "@/hooks/useBoard.ts";
 
 const PlayerTurnInfo = () => {
     const {currentPlayer} = useBoard();

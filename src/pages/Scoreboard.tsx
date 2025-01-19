@@ -1,6 +1,6 @@
 import ScoreboardTable from "@/components/ScoreboardTable";
 import FilterScoreboard from "@/components/ScoreboardTable/FilterScoreboard";
-import {useScoreboard} from "@/hooks/useScoreboard.tsx";
+import {useScoreboard} from "@/hooks/useScoreboard.ts";
 import {motion} from "motion/react";
 
 const Scoreboard = () => {
