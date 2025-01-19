@@ -10,9 +10,9 @@ const ScoreboardTable = ({scoreboard}: {
         <motion.table
             initial={{opacity: 0}}
             animate={{opacity: 1}}
-            className="table table-md text-gray-dark dark:text-primary font-light cursor-default">
+            className="table table-sm sm:table-md text-gray-dark dark:text-primary font-light cursor-default">
             <thead>
-            <tr className="text-gray-dark dark:text-primary text-lg text-center">
+            <tr className="text-gray-dark dark:text-primary text-base sm:text-lg text-center">
                 <th></th>
                 <th>Username</th>
                 <th>Win Streak</th>

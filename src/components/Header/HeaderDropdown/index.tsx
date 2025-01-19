@@ -26,6 +26,8 @@ const HeaderDropdown = memo(({open, setOpen, headerLinks}: HeaderDropdownProps) 
             : gameStats.gameMode;
     };
 
+    // Je crée une fonction qui permet de gérer le click sur le bouton Game
+    // Cette fonction est obligée, car je dois envoyer des données à la page suivante.
     const handleGameClick = () => {
         if (isVerified({to: "/tic-tac-toe", text: "Game", needsVerification: true})) {
             navigate("/tic-tac-toe", {
