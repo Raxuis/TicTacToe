@@ -60,7 +60,7 @@ const WinnerInfo = () => {
                         )
                     }
                     <div className="flex justify-center gap-4 pt-2">
-                        <ButtonClickEffect className="bg-primary text-gray-dark cursor-pointer shadow-buttonGreyLight"
+                        <ButtonClickEffect className="bg-primary hover:bg-primary/90 text-gray-dark cursor-pointer shadow-buttonGreyLight"
                                            onClick={() => {
                                                handleClick();
                                                navigate("/");
@@ -68,7 +68,7 @@ const WinnerInfo = () => {
                             QUIT
                         </ButtonClickEffect>
                         <ButtonClickEffect
-                            className="bg-secondary text-gray-dark cursor-pointer shadow-buttonSecondary"
+                            className="bg-secondary hover:bg-secondary/90 text-gray-dark cursor-pointer shadow-buttonSecondary"
                             onClick={() => handleClick()}>
                             NEXT ROUND
                         </ButtonClickEffect>

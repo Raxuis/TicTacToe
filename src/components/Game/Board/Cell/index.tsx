@@ -4,6 +4,7 @@ import {BoardPlayer} from "@/types";
 import {useBoard} from "@/hooks/useBoard.tsx";
 import {cn} from "@/libs/cn.ts";
 import {memo, useMemo} from "react";
+import Button from "@/components/Button";
 
 type CellProps = {
     cellValue: BoardPlayer;
@@ -73,7 +74,7 @@ const Cell = memo(({
     }, []);
 
     return (
-        <div
+        <Button
             className={cn('bg-gray-medium size-24 flex items-center justify-center text-xl font-bold cursor-pointer p-4 rounded-lg shadow-cellGreyShadow active:shadow-none active:translate-y-1'
                 , isWinningCell && (cellValue === "X" ? "bg-primary" : "bg-secondary")
             )}
@@ -92,7 +93,7 @@ const Cell = memo(({
                         )}
                     />
                 ))}
-        </div>
+        </Button>
     );
 });
 
