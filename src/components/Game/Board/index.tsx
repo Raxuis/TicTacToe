@@ -1,4 +1,4 @@
-import {useBoard} from "@/hooks/useBoard.tsx";
+import {useBoard} from "@/hooks/useBoard.ts";
 import Cell from "@/components/Game/Board/Cell";
 
 const Board = () => {

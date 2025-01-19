@@ -1,7 +1,7 @@
 import cross from "@/assets/cross.svg";
 import circle from "@/assets/circle.svg";
 import {BoardPlayer} from "@/types";
-import {useBoard} from "@/hooks/useBoard.tsx";
+import {useBoard} from "@/hooks/useBoard.ts";
 import {cn} from "@/libs/cn.ts";
 import {memo, useMemo} from "react";
 import Button from "@/components/Button";

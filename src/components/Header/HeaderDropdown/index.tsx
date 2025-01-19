@@ -3,7 +3,7 @@ import {cn} from "@/libs/cn.ts";
 import {Link, useNavigate} from "react-router";
 import {Dispatch, memo, SetStateAction} from "react";
 import {HeaderLinkType} from "@/components/Header";
-import {useBoard} from "@/hooks/useBoard.tsx";
+import {useBoard} from "@/hooks/useBoard.ts";
 
 type HeaderDropdownProps = {
     open: boolean;
