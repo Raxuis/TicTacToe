@@ -13,7 +13,7 @@ const FilterScoreboard = () => {
                     isActive={filter === "WIN_STREAK"}
                 >
                     <Trophy/>
-                    <p>Win Streak</p>
+                    <span>Win Streak</span>
                 </FilterButton>
                 <FilterButton
                     onClick={() => setFilter("DATE")}
