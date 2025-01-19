@@ -1,5 +1,5 @@
-import Cell from "./Cell";
 import {useBoard} from "@/hooks/useBoard.tsx";
+import Cell from "@/components/Game/Board/Cell";
 
 const Board = () => {
     const {
