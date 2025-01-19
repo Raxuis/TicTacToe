@@ -6,6 +6,8 @@ export const initialBoard: BoardPlayer[][] = [
     ["", "", ""]
 ];
 
+// Création d'un dictionnaire de jeux de morpion
+// pour simplifier la sélection du mode de jeu dans le formulaire de la page d'accueil.
 
 export const ticTacToes: TicTacToe[] = [
     {
