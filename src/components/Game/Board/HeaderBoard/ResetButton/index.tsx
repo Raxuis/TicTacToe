@@ -1,14 +1,14 @@
 import {RotateCcw} from "lucide-react";
-import Button from "@/components/Button";
 import {useBoard} from "@/hooks/useBoard.ts";
+import ButtonClickEffect from "@/components/ButtonClickEffect";
 
 const ResetButton = () => {
     const {giveUpGame} = useBoard();
     return (
-        <Button onClick={() => giveUpGame()}
-                className="bg-primary hover:bg-primary/90 text-gray-dark shadow-buttonGreyLight active:shadow-none active:translate-y-1">
+        <ButtonClickEffect onClick={() => giveUpGame()}
+                className="bg-primary hover:bg-primary/90 text-gray-dark shadow-buttonGreyLight">
             <RotateCcw/>
-        </Button>
+        </ButtonClickEffect>
     );
 };
 
