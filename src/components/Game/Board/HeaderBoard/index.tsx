@@ -1,6 +1,6 @@
-import PlayerTurnInfo from "./PlayerTurnInfo";
-import BoardIcons from "./BoardIcons";
-import ResetButton from "./ResetButton";
+import BoardIcons from "@/components/Game/Board/HeaderBoard/BoardIcons";
+import PlayerTurnInfo from "@/components/Game/Board/HeaderBoard/PlayerTurnInfo";
+import ResetButton from "@/components/Game/Board/HeaderBoard/ResetButton";
 
 const HeaderBoard = () => {
     return (
